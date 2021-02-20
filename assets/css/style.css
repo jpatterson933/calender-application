@@ -1,0 +1,33 @@
+/* span inside of time div container */
+#hourly-container {
+
+}
+
+.hourly-rows {
+    display: flex;
+    flex-direction: row;
+  
+}
+
+
+.time {
+    flex: 0;
+    padding: 2em;
+    text-align: center;
+    background-color: rgba(113, 152, 189, 1);
+    border: 1px solid black;
+    max-width: 95px;
+}
+
+.text-area {
+    flex: 1;
+
+}
+
+.save {
+    flex: 0;
+    padding: 2em;
+    text-align: center;
+    background-color: rgba(113, 152, 189, 1);
+    border: 1px solid black;
+}
