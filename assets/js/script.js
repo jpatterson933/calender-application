@@ -1,3 +1,4 @@
+//variables that grab input
 var nineSave = document.getElementById("nine-save-task");
 var tenSave = document.getElementById("ten-save-task");
 var elevenSave = document.getElementById("eleven-save-task");
@@ -8,9 +9,7 @@ var fifteenSave = document.getElementById("fifteen-save-task");
 var sixteenSave = document.getElementById("sixteen-save-task");
 var seventeenSave = document.getElementById("seventeen-save-task");
 
-var test = $("save");
-
-//
+//variables to grab save buttons
 var nine = document.getElementById("nine");
 var ten = document.getElementById("ten");
 var eleven = document.getElementById("eleven");
@@ -22,13 +21,41 @@ var sixteen = document.getElementById("sixteen");
 var seventeen = document.getElementById("seventeen");
 
 //time display
-var date = moment()
-$("#date").text(date.format('MMMM Do YYYY, h:mm:ss a'));
+var currentTime = moment()
 
-//
+//variabls to pulled stored tasks
+var nineTaskStored = JSON.parse(localStorage.getItem("9-task"));
+var tenTaskStored = JSON.parse(localStorage.getItem("10-task"));
+var elevenTaskStored = JSON.parse(localStorage.getItem("11-task"));
+var twelveTaskStored = JSON.parse(localStorage.getItem("12-task"));
+var thirteenTaskStored = JSON.parse(localStorage.getItem("13-task"));
+var fourteenTaskStored = JSON.parse(localStorage.getItem("14-task"));
+var fifteenTaskStored = JSON.parse(localStorage.getItem("15-task"));
+var sixteenTaskStored = JSON.parse(localStorage.getItem("16-task"));
+var seventeenTaskStored = JSON.parse(localStorage.getItem("17-task"));
+
+
+
+
+
+
+function renderNineTask() {    
+    document.getElementById("nine-save-task").innerHTML = nineTaskStored;
+  }
+
+renderNineTask();
+
+
+
+//inputs current date and time into 
+$("#date").text(currentTime.format('MMMM Do YYYY, h:mm:ss a'));
+
+
+//event listners that save input
 nine.addEventListener("click", function() {
     localStorage.setItem("9-task", JSON.stringify(nineSave.value));
 })
+
 
 ten.addEventListener("click", function() {
     localStorage.setItem("10-task", JSON.stringify(tenSave.value));
