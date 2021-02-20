@@ -1,4 +1,42 @@
+//variables to clear specific time slots
 var clearStorage = document.getElementById("clear-storage");
+var nineClear = $("#nine-clear");
+var tenClear = $("#ten-clear");
+var elevenClear = $("#eleven-clear");
+var twelveClear = $("#twelve-clear");
+var thirteenClear = $("#thirteen-clear");
+var fourteenClear = $("#fourteen-clear");
+var fifteenClear = $("#fifteen-clear");
+var sixteenClear = $("#sixteen-clear");
+var seventeenClear = $("#seventeen-clear");
+//functions to clear time slots
+nineClear.on("click", function (){
+    localStorage.removeItem("9-task");
+})
+tenClear.on("click", function () {
+    localStorage.removeItem("10-task");
+})
+elevenClear.on("click", function () {
+    localStorage.removeItem("11-task");
+})
+twelveClear.on("click", function () {
+    localStorage.removeItem("12-task");
+})
+thirteenClear.on("click", function () {
+    localStorage.removeItem("13-task");
+})
+fourteenClear.on("click", function () {
+    localStorage.removeItem("14-task");
+})
+fifteenClear.on("click", function () {
+    localStorage.removeItem("15-task");
+})
+sixteenClear.on("click", function () {
+    localStorage.removeItem("16-task");
+})
+seventeenClear.on("click", function () {
+    localStorage.removeItem("17-task");
+})
 
 
 //variables that grab input
