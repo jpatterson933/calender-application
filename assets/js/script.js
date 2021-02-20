@@ -34,16 +34,45 @@ var fifteenTaskStored = JSON.parse(localStorage.getItem("15-task"));
 var sixteenTaskStored = JSON.parse(localStorage.getItem("16-task"));
 var seventeenTaskStored = JSON.parse(localStorage.getItem("17-task"));
 
-
-
-
-
-
+//functions to store tasks
 function renderNineTask() {    
     document.getElementById("nine-save-task").innerHTML = nineTaskStored;
   }
+function renderTenTask() {
+    document.getElementById("ten-save-task").innerHTML = tenTaskStored;
+}
+function renderElevenTask() {
+    document.getElementById("eleven-save-task").innerHTML = elevenTaskStored;
+}
+function renderTwelveTask() {
+    document.getElementById("twelve-save-task").innerHTML = twelveTaskStored;
+}
+function renderThirteenTask() {
+    document.getElementById("thirteen-save-task").innerHTML = thirteenTaskStored;
+}
+function renderFourteenTask() {
+    document.getElementById("fourteen-save-task").innerHTML = fourteenTaskStored;
+}
+function renderFifteenTask() {
+    document.getElementById("fifteen-save-task").innerHTML = fifteenTaskStored;
+}
+function renderSixteenTask() {
+    document.getElementById("sixteen-save-task").innerHTML = sixteenTaskStored;
+}
+function renderSeventeenTask() {
+    document.getElementById("seventeen-save-task").innerHTML = seventeenTaskStored;
+}
+
 
 renderNineTask();
+renderTenTask();
+renderElevenTask();
+renderTwelveTask();
+renderThirteenTask();
+renderFourteenTask();
+renderFifteenTask();
+renderSixteenTask();
+renderSeventeenTask();
 
 
 
