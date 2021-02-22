@@ -31,23 +31,20 @@ for (var i = 0; i < children.length; i++) {
     // 2: button#ten.save
     var hourlyGrabChildren = hourGrab.children;
 
-
-
-
     //i can set attributes for all looped elements
-    hourlyGrabChildren[0].setAttribute("style", "color:black; font-size: 15px");
-    hourlyGrabChildren[1].setAttribute("style", "color: blue")
+    // hourlyGrabChildren[0].setAttribute("style", "color:black; font-size: 15px");
+    // hourlyGrabChildren[1].setAttribute("style", "color: blue")
   
-    hourlyGrabChildren[0].onclick = function () {
-        localStorage.removeItem("9-task");
-        location.reload();
-    }
-
-    console.log(hourlyGrabChildren[0]);
+    // hourlyGrabChildren[0].onclick = function () {
+    //     localStorage.removeItem("9-task");
+    //     location.reload();
+    // }
     
-    
+    // console.log(hourGrab);
+    // console.log(hourlyGrabChildren[0]);
 }
 
+console.log(i);
 
 //set data attribute for each element
 //check slack for link
@@ -57,42 +54,42 @@ for (var i = 0; i < children.length; i++) {
 
 
 //functions to clear time slots
-// nineClear.on("click", function (){
-//     localStorage.removeItem("9-task");
-//     location.reload();
-// })
-// tenClear.on("click", function () {
-//     localStorage.removeItem("10-task");
-//     location.reload();
-// })
-// elevenClear.on("click", function () {
-//     localStorage.removeItem("11-task");
-//     location.reload();
-// })
-// twelveClear.on("click", function () {
-//     localStorage.removeItem("12-task");
-//     location.reload();
-// })
-// thirteenClear.on("click", function () {
-//     localStorage.removeItem("13-task");
-//     location.reload();
-// })
-// fourteenClear.on("click", function () {
-//     localStorage.removeItem("14-task");
-//     location.reload();
-// })
-// fifteenClear.on("click", function () {
-//     localStorage.removeItem("15-task");
-//     location.reload();
-// })
-// sixteenClear.on("click", function () {
-//     localStorage.removeItem("16-task");
-//     location.reload();
-// })
-// seventeenClear.on("click", function () {
-//     localStorage.removeItem("17-task");
-//     location.reload();
-// })
+nineClear.on("click", function (){
+    localStorage.removeItem("9-task");
+    location.reload();
+})
+tenClear.on("click", function () {
+    localStorage.removeItem("10-task");
+    location.reload();
+})
+elevenClear.on("click", function () {
+    localStorage.removeItem("11-task");
+    location.reload();
+})
+twelveClear.on("click", function () {
+    localStorage.removeItem("12-task");
+    location.reload();
+})
+thirteenClear.on("click", function () {
+    localStorage.removeItem("13-task");
+    location.reload();
+})
+fourteenClear.on("click", function () {
+    localStorage.removeItem("14-task");
+    location.reload();
+})
+fifteenClear.on("click", function () {
+    localStorage.removeItem("15-task");
+    location.reload();
+})
+sixteenClear.on("click", function () {
+    localStorage.removeItem("16-task");
+    location.reload();
+})
+seventeenClear.on("click", function () {
+    localStorage.removeItem("17-task");
+    location.reload();
+})
 
 
 //variables that grab input
