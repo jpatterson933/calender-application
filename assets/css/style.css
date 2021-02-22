@@ -17,6 +17,7 @@
     background-color: rgba(113, 152, 189, 1);
     border: 1px solid black;
     max-width: 95px;
+    min-width: 95px;
 }
 
 .text-area {
