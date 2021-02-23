@@ -1,7 +1,7 @@
 //variables to clear specific time slots
 var clearStorage = document.getElementById("clear-storage");
 
-
+//variables for making time text containers into clear buttons
 var nineClear = $("#nine-clear");
 var tenClear = $("#ten-clear");
 var elevenClear = $("#eleven-clear");
@@ -12,48 +12,18 @@ var fifteenClear = $("#fifteen-clear");
 var sixteenClear = $("#sixteen-clear");
 var seventeenClear = $("#seventeen-clear");
 
-var children = document.getElementById("hourly-container").children;
+//variabls to pulled stored tasks
+var nineTaskStored = JSON.parse(localStorage.getItem("9-task"));
+var tenTaskStored = JSON.parse(localStorage.getItem("10-task"));
+var elevenTaskStored = JSON.parse(localStorage.getItem("11-task"));
+var twelveTaskStored = JSON.parse(localStorage.getItem("12-task"));
+var thirteenTaskStored = JSON.parse(localStorage.getItem("13-task"));
+var fourteenTaskStored = JSON.parse(localStorage.getItem("14-task"));
+var fifteenTaskStored = JSON.parse(localStorage.getItem("15-task"));
+var sixteenTaskStored = JSON.parse(localStorage.getItem("16-task"));
+var seventeenTaskStored = JSON.parse(localStorage.getItem("17-task"));
 
-// console.log(children);
-
-
-
-
-//for loop cycles through children of hourly-container - the children of hourly container are the 9 hours of the 9-5 day
-for (var i = 0; i < children.length; i++) {
-    //var - will loop through the length of the children, and each loop will be stored into hourGrab
-    var hourGrab = children[i];
-
-    //hourlyGrabChildren will then take the children of each each child of #hourly-container and create an array like so
-    //array position: element - id of element - class of element
-    // 0: div#ten-clear.time
-    // 1: textarea#ten-save-task.text-area
-    // 2: button#ten.save
-    var hourlyGrabChildren = hourGrab.children;
-
-    //i can set attributes for all looped elements
-    // hourlyGrabChildren[0].setAttribute("style", "color:black; font-size: 15px");
-    // hourlyGrabChildren[1].setAttribute("style", "color: blue")
-  
-    // hourlyGrabChildren[0].onclick = function () {
-    //     localStorage.removeItem("9-task");
-    //     location.reload();
-    // }
-    
-    // console.log(hourGrab);
-    // console.log(hourlyGrabChildren[0]);
-}
-
-console.log(i);
-
-//set data attribute for each element
-//check slack for link
-//use data attribute in remove item in functions
-//or even set id to be nineTask and use the id 
-
-
-
-//functions to clear time slots
+// //functions to clear time slots
 nineClear.on("click", function (){
     localStorage.removeItem("9-task");
     location.reload();
@@ -91,8 +61,7 @@ seventeenClear.on("click", function () {
     location.reload();
 })
 
-
-//variables that grab input
+//variables that grab text input
 var nineSave = document.getElementById("nine-save-task");
 var tenSave = document.getElementById("ten-save-task");
 var elevenSave = document.getElementById("eleven-save-task");
@@ -102,8 +71,6 @@ var fourteenSave = document.getElementById("fourteen-save-task");
 var fifteenSave = document.getElementById("fifteen-save-task");
 var sixteenSave = document.getElementById("sixteen-save-task");
 var seventeenSave = document.getElementById("seventeen-save-task");
-
-//ternerary operator ? saying what you return if condition currenthour === 9 is true
 
 //time display
 var currentTime = moment()
@@ -122,7 +89,6 @@ changeColor(15, fifteenSave);
 changeColor(16, sixteenSave);
 changeColor(17, seventeenSave);
 
-
 //hour and element are the paraemeters we will defin inside of the funciotn changeColor when we run it above
 function changeColor(hour, element) {
     if (currentHour === hour) {
@@ -138,7 +104,6 @@ function changeColor(hour, element) {
     // console.log(hour, currentHour)
 }
 
-
 //variables to grab save buttons
 var nine = document.getElementById("nine");
 var ten = document.getElementById("ten");
@@ -150,26 +115,8 @@ var fifteen = document.getElementById("fifteen");
 var sixteen = document.getElementById("sixteen");
 var seventeen = document.getElementById("seventeen");
 
-
-//variabls to pulled stored tasks
-var nineTaskStored = JSON.parse(localStorage.getItem("9-task"));
-var tenTaskStored = JSON.parse(localStorage.getItem("10-task"));
-var elevenTaskStored = JSON.parse(localStorage.getItem("11-task"));
-var twelveTaskStored = JSON.parse(localStorage.getItem("12-task"));
-var thirteenTaskStored = JSON.parse(localStorage.getItem("13-task"));
-var fourteenTaskStored = JSON.parse(localStorage.getItem("14-task"));
-var fifteenTaskStored = JSON.parse(localStorage.getItem("15-task"));
-var sixteenTaskStored = JSON.parse(localStorage.getItem("16-task"));
-var seventeenTaskStored = JSON.parse(localStorage.getItem("17-task"));
-
-
-
 //inputs current date and time into 
 $("#date").text(currentTime.format('MMMM Do YYYY, h:mm:ss a'));
-
-
-
-
 
 //functions to store tasks
 function renderNineTask() {    

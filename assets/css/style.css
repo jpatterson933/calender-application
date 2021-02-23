@@ -13,6 +13,13 @@
     color: white;
 }
 
+#clear-storage:hover {
+    background-color: rgba(113, 152, 189, 1);
+    box-shadow: 0 0 0 0;
+
+
+}
+
 .hourly-rows {
     display: flex;
     flex-direction: row;
@@ -24,15 +31,38 @@
     flex: 0;
     padding: 2em;
     text-align: center;
-    background-color: rgba(113, 152, 189, 1);
+    background-color: rgba(113, 152, 189, .5);
     border: 1px solid black;
     max-width: 95px;
     min-width: 95px;
     cursor: pointer;
 }
 
+.time:hover {
+    background-color: rgba(113, 152, 189, 1);
+    color: white;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    background-color: rgba( 113, 152, 189, 1);
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: .5em;
+    color: white;
+    font-size: .9em;
+}
+.time:hover .tooltiptext{
+    visibility: visible;
+}
+
 .text-area {
     flex: 1;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.2em;
+    color: rgba(113, 152, 189, 1);
 
 }
 
@@ -40,6 +70,11 @@
     flex: 0;
     padding: 2em;
     text-align: center;
-    background-color: rgba(113, 152, 189, 1);
+    background-color: rgba(113, 152, 189, .5);
     border: 1px solid black;
+}
+.save:hover {
+    background-color: rgba(113, 152, 189, 1);
+    color: white;
+
 }
