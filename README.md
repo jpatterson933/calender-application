@@ -1,14 +1,15 @@
+# Jeffery William Patterson
+
 # calender-application
 This is a very simple nine to five calendar application for logging events for the day.
 
 # 9-5 Daily Planner
 Nine to Five Daily Planner
 
-Link to deployed webpage 
+Link to deployed webpage: https://jpatterson933.github.io/calender-application/
 
-link to repository
+Link to repository: https://github.com/jpatterson933/calender-application
 
-# Jeffery William Patterson
 
 ### My webpage can accomplish the list of things below.
 
