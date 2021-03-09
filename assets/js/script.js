@@ -93,15 +93,11 @@ changeColor(17, seventeenSave);
 function changeColor(hour, element) {
     if (currentHour === hour) {
         element.style.backgroundColor = "rgba( 255, 0, 0, .3)";
-
     } else if (currentHour > hour) {
         element.style.backgroundColor = "rgba(160, 160, 160, .5)";
-
     } else {
         element.style.backgroundColor = "rgba(0, 255, 0, .1)";
     }
-    //console log paraemeters to make sure they appear
-    // console.log(hour, currentHour)
 }
 
 //variables to grab save buttons
@@ -118,45 +114,19 @@ var seventeen = document.getElementById("seventeen");
 //inputs current date and time into 
 $("#date").text(currentTime.format('MMMM Do YYYY, h:mm:ss a'));
 
-//functions to store tasks
-function renderNineTask() {    
-    document.getElementById("nine-save-task").innerHTML = nineTaskStored;
+//function to display saved tasks
+saveTasks = () => {
+    $("#nine-save-task").text(nineTaskStored)
+    $("#ten-save-task").text(tenTaskStored)
+    $("#eleven-save-task").text(elevenTaskStored)
+    $("#twelve-save-task").text(twelveTaskStored)
+    $("#thirteen-save-task").text(thirteenTaskStored)
+    $("#fourteen-save-task").text(fourteenTaskStored)
+    $("#fifteen-save-task").text(fifteenTaskStored)
+    $("#sixteen-save-task").text(sixteenTaskStored)
+    $("#seventeen-save-task").text(seventeenTaskStored)
 }
-function renderTenTask() {
-    document.getElementById("ten-save-task").innerHTML = tenTaskStored;
-}
-function renderElevenTask() {
-    document.getElementById("eleven-save-task").innerHTML = elevenTaskStored;
-}
-function renderTwelveTask() {
-    document.getElementById("twelve-save-task").innerHTML = twelveTaskStored;
-}
-function renderThirteenTask() {
-    document.getElementById("thirteen-save-task").innerHTML = thirteenTaskStored;
-}
-function renderFourteenTask() {
-    document.getElementById("fourteen-save-task").innerHTML = fourteenTaskStored;
-}
-function renderFifteenTask() {
-    document.getElementById("fifteen-save-task").innerHTML = fifteenTaskStored;
-}
-function renderSixteenTask() {
-    document.getElementById("sixteen-save-task").innerHTML = sixteenTaskStored;
-}
-function renderSeventeenTask() {
-    document.getElementById("seventeen-save-task").innerHTML = seventeenTaskStored;
-}
-
-//shows saved tasks upon page reload
-renderNineTask();
-renderTenTask();
-renderElevenTask();
-renderTwelveTask();
-renderThirteenTask();
-renderFourteenTask();
-renderFifteenTask();
-renderSixteenTask();
-renderSeventeenTask();
+saveTasks()
 
 //functions to save tasks
 nine.addEventListener("click", function() {
@@ -192,8 +162,3 @@ clearStorage.addEventListener("click", function () {
     localStorage.clear();
     location.reload();
 });
-
-
-
-
-
