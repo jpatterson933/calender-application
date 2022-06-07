@@ -1,27 +1,27 @@
 //variables to clear specific time slots
-var clearStorage = document.getElementById("clear-storage");
+let clearStorage = document.getElementById("clear-storage");
 
 //variables for making time text containers into clear buttons
-var nineClear = $("#nine-clear");
-var tenClear = $("#ten-clear");
-var elevenClear = $("#eleven-clear");
-var twelveClear = $("#twelve-clear");
-var thirteenClear = $("#thirteen-clear");
-var fourteenClear = $("#fourteen-clear");
-var fifteenClear = $("#fifteen-clear");
-var sixteenClear = $("#sixteen-clear");
-var seventeenClear = $("#seventeen-clear");
+let nineClear = $("#nine-clear");
+let tenClear = $("#ten-clear");
+let elevenClear = $("#eleven-clear");
+let twelveClear = $("#twelve-clear");
+let thirteenClear = $("#thirteen-clear");
+let fourteenClear = $("#fourteen-clear");
+let fifteenClear = $("#fifteen-clear");
+let sixteenClear = $("#sixteen-clear");
+let seventeenClear = $("#seventeen-clear");
 
 //variabls to pulled stored tasks
-var nineTaskStored = JSON.parse(localStorage.getItem("9-task"));
-var tenTaskStored = JSON.parse(localStorage.getItem("10-task"));
-var elevenTaskStored = JSON.parse(localStorage.getItem("11-task"));
-var twelveTaskStored = JSON.parse(localStorage.getItem("12-task"));
-var thirteenTaskStored = JSON.parse(localStorage.getItem("13-task"));
-var fourteenTaskStored = JSON.parse(localStorage.getItem("14-task"));
-var fifteenTaskStored = JSON.parse(localStorage.getItem("15-task"));
-var sixteenTaskStored = JSON.parse(localStorage.getItem("16-task"));
-var seventeenTaskStored = JSON.parse(localStorage.getItem("17-task"));
+let nineTaskStored = JSON.parse(localStorage.getItem("9-task"));
+let tenTaskStored = JSON.parse(localStorage.getItem("10-task"));
+let elevenTaskStored = JSON.parse(localStorage.getItem("11-task"));
+let twelveTaskStored = JSON.parse(localStorage.getItem("12-task"));
+let thirteenTaskStored = JSON.parse(localStorage.getItem("13-task"));
+let fourteenTaskStored = JSON.parse(localStorage.getItem("14-task"));
+let fifteenTaskStored = JSON.parse(localStorage.getItem("15-task"));
+let sixteenTaskStored = JSON.parse(localStorage.getItem("16-task"));
+let seventeenTaskStored = JSON.parse(localStorage.getItem("17-task"));
 
 // //functions to clear time slots
 nineClear.on("click", function (){
@@ -62,19 +62,19 @@ seventeenClear.on("click", function () {
 })
 
 //variables that grab text input
-var nineSave = document.getElementById("nine-save-task");
-var tenSave = document.getElementById("ten-save-task");
-var elevenSave = document.getElementById("eleven-save-task");
-var twelveSave = document.getElementById("twelve-save-task");
-var thirteenSave = document.getElementById("thirteen-save-task");
-var fourteenSave = document.getElementById("fourteen-save-task");
-var fifteenSave = document.getElementById("fifteen-save-task");
-var sixteenSave = document.getElementById("sixteen-save-task");
-var seventeenSave = document.getElementById("seventeen-save-task");
+let nineSave = document.getElementById("nine-save-task");
+let tenSave = document.getElementById("ten-save-task");
+let elevenSave = document.getElementById("eleven-save-task");
+let twelveSave = document.getElementById("twelve-save-task");
+let thirteenSave = document.getElementById("thirteen-save-task");
+let fourteenSave = document.getElementById("fourteen-save-task");
+let fifteenSave = document.getElementById("fifteen-save-task");
+let sixteenSave = document.getElementById("sixteen-save-task");
+let seventeenSave = document.getElementById("seventeen-save-task");
 
 //time display
-var currentTime = moment()
-var currentHour = currentTime.hours();
+let currentTime = moment()
+let currentHour = currentTime.hours();
 
 //these run our function changeColor with the paraemters in place
 //the number is the hour we paraemeter we are setting it
@@ -89,7 +89,7 @@ changeColor(15, fifteenSave);
 changeColor(16, sixteenSave);
 changeColor(17, seventeenSave);
 
-//hour and element are the paraemeters we will defin inside of the funciotn changeColor when we run it above
+//hour and element are the paraemeters we will define inside of the funciotn changeColor when we run it above
 function changeColor(hour, element) {
     if (currentHour === hour) {
         element.style.backgroundColor = "rgba( 255, 0, 0, .3)";
@@ -101,15 +101,15 @@ function changeColor(hour, element) {
 }
 
 //variables to grab save buttons
-var nine = document.getElementById("nine");
-var ten = document.getElementById("ten");
-var eleven = document.getElementById("eleven");
-var twelve = document.getElementById("twelve");
-var thirteen = document.getElementById("thirteen");
-var fourteen = document.getElementById("fourteen");
-var fifteen = document.getElementById("fifteen");
-var sixteen = document.getElementById("sixteen");
-var seventeen = document.getElementById("seventeen");
+let nine = document.getElementById("nine");
+let ten = document.getElementById("ten");
+let eleven = document.getElementById("eleven");
+let twelve = document.getElementById("twelve");
+let thirteen = document.getElementById("thirteen");
+let fourteen = document.getElementById("fourteen");
+let fifteen = document.getElementById("fifteen");
+let sixteen = document.getElementById("sixteen");
+let seventeen = document.getElementById("seventeen");
 
 //inputs current date and time into 
 $("#date").text(currentTime.format('MMMM Do YYYY, h:mm:ss a'));
