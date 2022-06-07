@@ -1,16 +1,8 @@
-//variables to clear specific time slots
-let clearStorage = document.getElementById("clear-storage");
+//time display
+let currentTime = moment()
 
-//variables for making time text containers into clear buttons
-let nineClear = $("#nine-clear");
-let tenClear = $("#ten-clear");
-let elevenClear = $("#eleven-clear");
-let twelveClear = $("#twelve-clear");
-let thirteenClear = $("#thirteen-clear");
-let fourteenClear = $("#fourteen-clear");
-let fifteenClear = $("#fifteen-clear");
-let sixteenClear = $("#sixteen-clear");
-let seventeenClear = $("#seventeen-clear");
+//variables to clear specific time slots
+const clearStorage = document.getElementById("clear-storage");
 
 //variabls to pulled stored tasks
 let nineTaskStored = JSON.parse(localStorage.getItem("9-task"));
@@ -23,43 +15,60 @@ let fifteenTaskStored = JSON.parse(localStorage.getItem("15-task"));
 let sixteenTaskStored = JSON.parse(localStorage.getItem("16-task"));
 let seventeenTaskStored = JSON.parse(localStorage.getItem("17-task"));
 
+//function to display saved tasks
+saveTasks = () => {
+    $("#nine-save-task").text(nineTaskStored)
+    $("#ten-save-task").text(tenTaskStored)
+    $("#eleven-save-task").text(elevenTaskStored)
+    $("#twelve-save-task").text(twelveTaskStored)
+    $("#thirteen-save-task").text(thirteenTaskStored)
+    $("#fourteen-save-task").text(fourteenTaskStored)
+    $("#fifteen-save-task").text(fifteenTaskStored)
+    $("#sixteen-save-task").text(sixteenTaskStored)
+    $("#seventeen-save-task").text(seventeenTaskStored)
+};
+saveTasks();
+
+
 // //functions to clear time slots
-nineClear.on("click", function (){
+
+$("#nine-clear").click(function () {
     localStorage.removeItem("9-task");
     location.reload();
-})
-tenClear.on("click", function () {
+});
+$("#ten-clear").click(function () {
     localStorage.removeItem("10-task");
     location.reload();
-})
-elevenClear.on("click", function () {
+});
+$("#eleven-clear").click(function () {
     localStorage.removeItem("11-task");
     location.reload();
-})
-twelveClear.on("click", function () {
+});
+$("#twelve-clear").click(function () {
     localStorage.removeItem("12-task");
     location.reload();
-})
-thirteenClear.on("click", function () {
+});
+$("#thirteen-clear").click(function () {
     localStorage.removeItem("13-task");
     location.reload();
-})
-fourteenClear.on("click", function () {
+});
+$("#fourteen-clear").click(function () {
     localStorage.removeItem("14-task");
     location.reload();
-})
-fifteenClear.on("click", function () {
+});
+$("#fifteen-clear").click(function () {
     localStorage.removeItem("15-task");
     location.reload();
-})
-sixteenClear.on("click", function () {
+});
+$("#sixteen-clear").click(function () {
     localStorage.removeItem("16-task");
     location.reload();
-})
-seventeenClear.on("click", function () {
+});
+$("#seventeen-clear").click(function () {
     localStorage.removeItem("17-task");
     location.reload();
-})
+});
+
 
 //variables that grab text input
 let nineSave = document.getElementById("nine-save-task");
@@ -71,10 +80,6 @@ let fourteenSave = document.getElementById("fourteen-save-task");
 let fifteenSave = document.getElementById("fifteen-save-task");
 let sixteenSave = document.getElementById("sixteen-save-task");
 let seventeenSave = document.getElementById("seventeen-save-task");
-
-//time display
-let currentTime = moment()
-let currentHour = currentTime.hours();
 
 //these run our function changeColor with the paraemters in place
 //the number is the hour we paraemeter we are setting it
@@ -91,6 +96,8 @@ changeColor(17, seventeenSave);
 
 //hour and element are the paraemeters we will define inside of the funciotn changeColor when we run it above
 function changeColor(hour, element) {
+    let currentHour = currentTime.hours();
+
     if (currentHour === hour) {
         element.style.backgroundColor = "rgba( 255, 0, 0, .3)";
     } else if (currentHour > hour) {
@@ -98,64 +105,41 @@ function changeColor(hour, element) {
     } else {
         element.style.backgroundColor = "rgba(0, 255, 0, .1)";
     }
-}
-
-//variables to grab save buttons
-let nine = document.getElementById("nine");
-let ten = document.getElementById("ten");
-let eleven = document.getElementById("eleven");
-let twelve = document.getElementById("twelve");
-let thirteen = document.getElementById("thirteen");
-let fourteen = document.getElementById("fourteen");
-let fifteen = document.getElementById("fifteen");
-let sixteen = document.getElementById("sixteen");
-let seventeen = document.getElementById("seventeen");
+};
 
 //inputs current date and time into 
 $("#date").text(currentTime.format('MMMM Do YYYY, h:mm:ss a'));
 
-//function to display saved tasks
-saveTasks = () => {
-    $("#nine-save-task").text(nineTaskStored)
-    $("#ten-save-task").text(tenTaskStored)
-    $("#eleven-save-task").text(elevenTaskStored)
-    $("#twelve-save-task").text(twelveTaskStored)
-    $("#thirteen-save-task").text(thirteenTaskStored)
-    $("#fourteen-save-task").text(fourteenTaskStored)
-    $("#fifteen-save-task").text(fifteenTaskStored)
-    $("#sixteen-save-task").text(sixteenTaskStored)
-    $("#seventeen-save-task").text(seventeenTaskStored)
-}
-saveTasks()
+
 
 //functions to save tasks
-nine.addEventListener("click", function() {
+$("#nine").click(function () {
     localStorage.setItem("9-task", JSON.stringify(nineSave.value));
-})
-ten.addEventListener("click", function() {
+});
+$("#ten").click(function () {
     localStorage.setItem("10-task", JSON.stringify(tenSave.value));
-})
-eleven.addEventListener("click", function() {
+});
+$("#eleven").click(function () {
     localStorage.setItem("11-task", JSON.stringify(elevenSave.value));
-})
-twelve.addEventListener("click", function() {
+});
+$("#twelve").click(function () {
     localStorage.setItem("12-task", JSON.stringify(twelveSave.value));
-})
-thirteen.addEventListener("click", function() {
+});
+$("#thirteen").click(function () {
     localStorage.setItem("13-task", JSON.stringify(thirteenSave.value));
-})
-fourteen.addEventListener("click", function() {
+});
+$("#fourteen").click(function () {
     localStorage.setItem("14-task", JSON.stringify(fourteenSave.value));
-})
-fifteen.addEventListener("click", function() {
+});
+$("#fifteen").click(function () {
     localStorage.setItem("15-task", JSON.stringify(fifteenSave.value));
-})
-sixteen.addEventListener("click", function() {
+});
+$("#sixteen").click(function () {
     localStorage.setItem("16-task", JSON.stringify(sixteenSave.value));
-})
-seventeen.addEventListener("click", function() {
+});
+$("#seventeen").click(function () {
     localStorage.setItem("17-task", JSON.stringify(seventeenSave.value));
-})
+});
 
 //function to clear all
 clearStorage.addEventListener("click", function () {
