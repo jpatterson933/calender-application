@@ -29,9 +29,7 @@ saveTasks = () => {
 };
 saveTasks();
 
-
 // //functions to clear time slots
-
 $("#nine-clear").click(function () {
     localStorage.removeItem("9-task");
     location.reload();
@@ -94,7 +92,9 @@ changeColor(15, fifteenSave);
 changeColor(16, sixteenSave);
 changeColor(17, seventeenSave);
 
-//hour and element are the paraemeters we will define inside of the funciotn changeColor when we run it above
+finishTask(nineSave);
+
+//hchanges color based off of time, anything we have passed, opacity drops to 50%
 function changeColor(hour, element) {
     let currentHour = currentTime.hours();
 
@@ -102,15 +102,41 @@ function changeColor(hour, element) {
         element.style.backgroundColor = "rgba( 255, 0, 0, .3)";
     } else if (currentHour > hour) {
         element.style.backgroundColor = "rgba(160, 160, 160, .5)";
+        element.style.opacity = "50%";
     } else {
         element.style.backgroundColor = "rgba(0, 255, 0, .1)";
     }
 };
 
+// trying to save the checkbox so it stays check - using local storage
+function finishTask(element) {
+
+    let nineBox = document.getElementById('nine-box');
+ 
+    
+    nineBox.addEventListener('click', function (event) {
+        console.log(event.target, "event target")
+
+        
+
+        const { name, value } = event.target;
+        const item = localStorage.getItem(name);
+        console.log(item)
+
+        if (document.getElementById('nine-box').checked === true) {
+            localStorage.setItem(name, value);
+            element.style.textDecoration = "line-through";
+            alert("You have complete these tasks!")
+        } else if (document.getElementById('nine-box').checked !== true) {
+            localStorage.removeItem(name);
+            element.style.textDecoration = "none";
+            alert("Looks like these tasks have not been completed!")
+        }
+    })
+};
+
 //inputs current date and time into 
-$("#date").text(currentTime.format('MMMM Do YYYY, h:mm:ss a'));
-
-
+$("#date").text(currentTime.format('MMMM Do YYYY, h:mm:ss A'));
 
 //functions to save tasks
 $("#nine").click(function () {
