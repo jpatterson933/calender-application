@@ -117,8 +117,6 @@ function finishTask(element) {
     nineBox.addEventListener('click', function (event) {
         console.log(event.target, "event target")
 
-        
-
         const { name, value } = event.target;
         const item = localStorage.getItem(name);
         console.log(item)
