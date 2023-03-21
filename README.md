@@ -3,28 +3,18 @@
 # calender-application
 This is a very simple nine to five calendar application for logging events for the day.
 
-# 9-5 Daily Planner
-Nine to Five Daily Planner
+# Weekly planner for full stack. User directions below. 
 
-Link to deployed webpage: https://jpatterson933.github.io/calender-application/
+I want to be able to add new weeks.
+    - Simply click a button and a new 7 days will pop up and save itself.
+I want old weeks to remove themselves when the dates are no longer relevant.
+    - I want a screen to show 'future weeks'
+    - old weeks will be archived
+I want each day to be able to see my availability to the relevant timezones for each day. 
+I want to be able to add shifts with in its relevant times zone
+    - when the shifts are added, my availability for the other time zones will be automatically updated
 
-Link to repository: https://github.com/jpatterson933/calender-application
+I will need a backend database that saves data. This will require routes, as well data washing. I will most likely have a sign in form that requires the user to sign in in order to access their account homepage. There will only be 1 page to view.
 
-
-### My webpage can accomplish the list of things below.
-
-1. The top banner provides the user with a title and the current date and time that they will use the nine to five planner.
-    A. Within the banner is a clear all button. This button will allow the user to clear all tasks and events that have been scheduled. Placed at the top so when the page is loaded at the beginning of their day they can clear page and start new day.
-        I. ![A user clicks on slots on the Clear Entire Day button and clears all hours](./assets/videos/clear-all.gif)
-***
-2. When the user enters text and clicks save. The text/task they input will stay even if they refresh the page.
-    A: ![A user clicks on the save button and when the page reloads, their task is still there](./assets/videos/save-tasks.gif)
-***
-3. When the user clicks on the time button, the tasks inputted and saved will be cleared ONLY in the specific time slot. Time button also has a tooltip to let the user know that it serves a secondary purpose other than displaying the time.
-    A: ![A user clicks on the time to clear that specific slot and sees a tooltip](./assets/videos/clear-single-hour.gif)
-***
-4. When a user views the page, past hours will be greyed, current hour will be red, and future hours will be green.
-    A: This function works but is only viewable during the hours nine-five. I finished this readme after hours and the project is due soon however from the videos above you can see all hours are grey.
-***
-5. The window can be any size and all elements within will adjust and fit properly.
-    A: ![Small Window Size](./assets/images/window-shrink.png)
+# What is the MVP?
+1. USER should be able to login and view a page that says hello and the information will be saved in a database. User will be automatically logged out after several minutes.
