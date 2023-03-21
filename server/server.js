@@ -35,7 +35,6 @@ const PORT = process.env.PORT || 4000;
 // }));
 // ------------------------------------
 // const schema = require('./schema/schema');
-// const connectionStringURI = `mongodb+srv://jpatt93:1J1Rg4drvXETlL8f@cluster0.h7w72et.mongodb.net/test`;
 
 // package that will allow us to allow cross origin requests
 // const cors = require('cors');
