@@ -1,7 +1,7 @@
 # Jeffery William Patterson
 
 # calender-application
-This is a very simple nine to five calendar application for logging events for the day.
+This is a very simple nine to five calendar application for logging events for the day. However, I am now transitioning this to a full stack application that will assist with picking up sub shifts in any timezone for edx full stack development bootcamp courses.
 
 # Weekly planner for full stack. User directions below. 
 
