@@ -1,14 +1,7 @@
 const mongoose = require('mongoose');
+require('dotenv').config()
 
-
-// mongoose.connect(
-//     process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mern-set-up',
-//     {
-//         useNewUrlParser: true,
-//         useUnifiedTopology: true,
-//     }
-// );
-
+const connectionStringURI = process.env.MONGO_URI;
 
 mongoose.connect(
     connectionStringURI,
@@ -16,7 +9,6 @@ mongoose.connect(
         useNewUrlParser: true,
         useUnifiedTopology: true
     },
-
 );
 
 module.exports = mongoose.connection;
