@@ -8,7 +8,7 @@ const { typeDefs, resolvers } = require('./schemas');
 // grab our mongoose db connection
 const db = require('./config/connection');
 // set up port with options for hidden port in live app
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
     typeDefs,
     resolvers
@@ -36,7 +36,7 @@ startApolloServer(server)
 db.once('open', () => {
     console.log('connected to database');
     app.listen(PORT, () => {
-        console.log('now listening for requests on port 4000');
+        console.log('now listening for requests on port 3001');
     })
 })
 //this has our app listening and tells us that the server is live

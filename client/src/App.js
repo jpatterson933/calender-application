@@ -1,12 +1,13 @@
-import './App.css';
-
 // import graph ql apollo client
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { Shift } from './components/Shift';
 
+const httpLink = createHttpLink({
+  uri: 'http://localhost:3001/graphql'
+})
 
 const client = new ApolloClient({
-  uri: '/graphql',
+  link: httpLink,
   cache: new InMemoryCache(),
 });
 

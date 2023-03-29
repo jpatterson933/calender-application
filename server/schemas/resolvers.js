@@ -1,3 +1,4 @@
+
 const { Shift } = require('../models');
 
 const resolvers = {
@@ -6,6 +7,10 @@ const resolvers = {
             return await Shift.find({})
         }
     }
+
+
+
+    
 }
 
 module.exports = resolvers;

@@ -13,7 +13,15 @@ const ShiftSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    startMeridian: {
+        type: String,
+        required: true
+    },
     endTime: {
+        type: String,
+        required: true
+    },
+    endMeridian: {
         type: String,
         required: true
     }
