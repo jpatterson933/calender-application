@@ -1,17 +1,12 @@
-const connection = require('../config/connection');
-
+const db = require('../config/connection');
+const shiftData = require('./shiftData.json');
 const { Shift } = require('../models');
 
 
-connection.once('open', async () => {
+db.once('open', async () => {
 
-    Shift.insertMany(
-        [
-            { date: '12/7/2023' },
-            { date: '01/2/2023' },
-            { date: '02/4/2023' },
-            { date: '03/4/2023' }
-        ]
-    )
-
+    await Shift.deleteMany({}); // empty collection
+    const shifts = await Shift.insertMany(shiftData)
+    console.log('all done!');
+    process.exit(0);
 })

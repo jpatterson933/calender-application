@@ -1,0 +1,20 @@
+[
+    {
+        "date": "3/29/2023",
+        "timezone": "Pacific",
+        "startTime": "5:45pm",
+        "endTime": "10:00pm"
+    },
+    {
+        "date": "3/30/2023",
+        "timezone": "Pacific",
+        "startTime": "5:45pm",
+        "endTime": "10:00pm"
+    },
+    {
+        "date": "4/4/2023",
+        "timezone": "Eastern",
+        "startTime": "9:15am",
+        "endTime": "3:30pm"
+    }
+]
