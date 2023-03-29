@@ -1,6 +1,6 @@
 import React from "react";
 
-const Shift = () => {
+export const Shift = () => {
     return (
         <h1>Test</h1>
     )
