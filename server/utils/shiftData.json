@@ -2,26 +2,19 @@
     {
         "date": "2023-03-29",
         "timezone": "Pacific",
-        "startTime": "5:45",
-        "startMeridian": "PM",
-        "endTime": "10:00",
-        "endMeridian": "PM"
+        "startTime": "17:45 PM",
+        "endTime": "20:00 PM"
     },
     {
         "date": "2023-03-30",
         "timezone": "Pacific",
-        "startTime": "5:45",
-        "startMeridian": "PM",
-        "endTime": "10:00",
-        "endMeridian": "PM"
-
+        "startTime": "17:45 PM",
+        "endTime": "20:00 PM"
     },
     {
         "date": "2023-04-04",
         "timezone": "Eastern",
-        "startTime": "9:15",
-        "startMeridian": "AM",
-        "endTime": "3:30",
-        "endMeridian": "PM"
+        "startTime": "9:15 AM",
+        "endTime": "15:30 PM"
     }
 ]

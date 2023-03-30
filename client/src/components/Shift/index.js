@@ -62,10 +62,26 @@ export const Shift = () => {
 
     const renderShift = (shift) => {
         // time slots from 5am to 9pm pacific time
-        const pacificTimeSlots = [5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        const pacificTimeSlots = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
         // Split the startTime and endTime strings on the ":" character to get the hour value
         const startHour = parseInt(shift.startTime.split(":")[0]);
         const endHour = parseInt(shift.endTime.split(":")[0]);
+        
+        const startMeridian = shift.startTime.split(":")[1].split(" ")[1]
+        const endMeridian = shift.endTime.split(":")[1].split(" ")[1]
+
+        const test = () => {
+            const test = pacificTimeSlots.slice(startIndex, endIndex + 1).map(slot => {
+                console.log(slot)
+            })
+
+            return test;
+        }
+
+        console.log(test)
+
+
+
 
         // Find the index of the corresponding time slots in the pacificTimeSlots array
         const startIndex = pacificTimeSlots.indexOf(startHour);
@@ -74,12 +90,15 @@ export const Shift = () => {
         // Render the shift with the matching time slots on the right side
         return (
             <section key={shift._id}>
-                <ul>
-                    {/* <li>{shift.date}</li> */}
-                    <li>{shift.timezone}</li>
-                    <li>{shift.startTime + " " + shift.startMeridian}</li>
-                    <li>{shift.endTime + " " + shift.endMeridian}</li>
-                </ul>
+                <div>
+                    {pacificTimeSlots.map(time => {
+
+                        if (time === startHour) {
+                            return <div style={{ color: "green" }}>{time}</div>
+                        } else
+                            return <div>{time}</div>
+                    })}
+                </div>
                 <div style={{ display: "flex", flexDirection: "row" }}>
                     {/* Render the time slots on the right side */}
                     <div style={{ display: "flex", flexDirection: "column" }}>

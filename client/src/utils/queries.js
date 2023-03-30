@@ -7,9 +7,7 @@ export const QUERY_SHIFTS = gql`
             date
             timezone
             startTime
-            startMeridian
             endTime
-            endMeridian
         }
 }
 `

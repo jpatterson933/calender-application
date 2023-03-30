@@ -8,9 +8,7 @@ const typeDefs = gql`
     date: String
     timezone: String
     startTime: String
-    startMeridian: String
     endTime: String
-    endMeridian: String
   }
 
   type Query {
