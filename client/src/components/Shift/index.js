@@ -47,6 +47,10 @@ export const Shift = () => {
 
             function matchDateWithDayOfWeek(day) {
                 const matchingDays = shifts.filter(shift => shift.date === day.date).map(shift => renderShift(shift));
+                // only calls rendershift if the shift matches
+                // so if render shift is called,
+                // it returns matching day of week
+                // then it puts it into the correct week container
                 return matchingDays;
             }
 
@@ -61,7 +65,6 @@ export const Shift = () => {
                     <h3>{day.day}</h3>
                     <h3>{formatDate(day.date)}</h3>
                     {matchDateWithDayOfWeek(day)}
-                    {/* {shifts.filter(shift => shift.date === day.date).map(shift => renderShift(shift))} */}
                 </div>
             ));
 
