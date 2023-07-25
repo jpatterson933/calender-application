@@ -1,40 +1,7 @@
 import React, { useMemo } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_SHIFTS } from "../../utils/queries";
-
-const getWeeks = (shifts) => {
-    const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    // // time slots from 5am to 9pm pacific time
-    // const pacificTimeSlots = [5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    // initiate empty weeks array
-    const weeks = [];
-
-    shifts.forEach((shift) => {
-        const currentDate = new Date(shift.date);
-        const currentDay = currentDate.getDay();
-        const startOfWeek = new Date(currentDate.setDate(currentDate.getDate() - (currentDay - 1)));
-
-        const weekStart = startOfWeek.toISOString().split("T")[0];
-        // console.log("Date information", weekStart)
-        // here we get the dates that start for the week, and it will set up a new week object with an empty array for five days
-        if (!weeks.find((week) => week.start === weekStart)) {
-            const week = {
-                start: weekStart,
-                days: []
-            };
-            // when a new week is created it will plug in five days with date formate 2023-mm-dd
-            for (let i = 1; i <= 5; i++) {
-                const dayDate = new Date(startOfWeek);
-                dayDate.setDate(dayDate.getDate() + (i - 1));
-                week.days.push({ day: weekDays[i], date: dayDate.toISOString().split("T")[0] });
-            }
-
-            weeks.push(week);
-        }
-    });
-    // console.log(weeks)
-    return weeks;
-};
+import {createWeek} from '../../utils/createWeek';
 
 export const Shift = () => {
     const { loading, data } = useQuery(QUERY_SHIFTS);
@@ -44,25 +11,14 @@ export const Shift = () => {
     }, [data])
 
     const weeks = useMemo(() => {
-        return getWeeks(shifts);
+        return createWeek(shifts);
     }, [shifts]);
 
-    const renderTimeSlot = (timeSlot, isMatch) => (
-        <div
-            key={timeSlot}
-            style={{
-                border: isMatch ? "1px solid black" : "none",
-                padding: "1rem",
-                margin: "1rem"
-            }}
-        >
-            {timeSlot}:00
-        </div>
-    );
 
     const renderShift = (shift) => {
         // time slots from 5am to 9pm pacific time
         const pacificTimeSlots = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+
         // Split the startTime and endTime strings on the ":" character to get the hour value
         const startHour = parseInt(shift.startTime.split(":")[0]);
         const endHour = parseInt(shift.endTime.split(":")[0]);

@@ -21,7 +21,7 @@ const app = express();
 
 // urlencoded() is a middleware function used to parse incoming requests with URL-encoded payloads. This middleware funciton is needed when you submit HTML form data in a POST request - it allows you to access the form data in 'req.body' of your route handler
 app.use(express.urlencoded({ extended: false}));
-// middleware funciton is used to parse incoming requests with JSON payloads. This middleware function is needed when you submit JSON data in a POST request, it allows you to access the JSON data in req.body of your route handler
+// middleware function is used to parse incoming requests with JSON payloads. This middleware function is needed when you submit JSON data in a POST request, it allows you to access the JSON data in req.body of your route handler
 // basically, these two things give us access to the data in req.body in the route handlers that we need to set up
 app.use(express.json());
 
