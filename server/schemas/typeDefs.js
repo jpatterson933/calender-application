@@ -14,6 +14,10 @@ const typeDefs = gql`
   type Query {
     shifts: [Shift]
   }
+
+  type Mutation {
+    addShift(date: String!, timezone: String!, startTime: String!, endTime: String!): Shift
+  }
 `;
 
 module.exports = typeDefs;

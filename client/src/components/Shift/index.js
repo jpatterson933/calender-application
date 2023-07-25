@@ -1,8 +1,9 @@
 import React, { useMemo } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_SHIFTS } from "../../utils/queries";
-import {createWeek} from "../../utils/createWeek";
-import {formatDate} from "../../utils/formatDate";
+import {createWeek, formatDate} from "../../utils/helpers";
+// import {createWeek} from "../../utils/createWeek";
+// import {formatDate} from "../../utils/formatDate";
 
 export const Shift = () => {
     const { loading, data } = useQuery(QUERY_SHIFTS);

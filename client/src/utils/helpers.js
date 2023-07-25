@@ -1,7 +1,5 @@
 export const createWeek = (shifts) => {
     const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    // // time slots from 5am to 9pm pacific time
-    // const pacificTimeSlots = [5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     // initiate empty weeks array
     const weeks = [];
 
@@ -31,3 +29,12 @@ export const createWeek = (shifts) => {
     // console.log(weeks)
     return weeks;
 };
+
+export const formatDate = (date) => {
+    const year = date.split("-")[0]
+    const month = date.split("-")[1]
+    const day = date.split("-")[2]
+
+    return `${month}/${day}/${year}`
+}
+
