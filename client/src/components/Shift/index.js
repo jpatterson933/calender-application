@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_SHIFTS } from "../../utils/queries";
-import {createWeek} from '../../utils/createWeek';
+import {createWeek} from "../../utils/createWeek";
+import {formatDate} from "../../utils/formatDate";
 
 export const Shift = () => {
     const { loading, data } = useQuery(QUERY_SHIFTS);
@@ -23,18 +24,8 @@ export const Shift = () => {
         const startHour = parseInt(shift.startTime.split(":")[0]);
         const endHour = parseInt(shift.endTime.split(":")[0]);
         
-        const startMeridian = shift.startTime.split(":")[1].split(" ")[1]
-        const endMeridian = shift.endTime.split(":")[1].split(" ")[1]
-
-        const test = () => {
-            const test = pacificTimeSlots.slice(startIndex, endIndex + 1).map(slot => {
-                console.log(slot)
-            })
-
-            return test;
-        }
-
-        console.log(test)
+        // const startMeridian = shift.startTime.split(":")[1].split(" ")[1]
+        // const endMeridian = shift.endTime.split(":")[1].split(" ")[1]
 
 
 
@@ -83,7 +74,7 @@ export const Shift = () => {
         return week.days.map((day) => (
             <div key={day.date} style={weekCardStyles}>
                 <h3>
-                    {day.day} - {day.date}
+                    {day.day} <br></br> {formatDate(day.date)}
                 </h3>
                 {/* {console.log(shifts)} */}
                 {shifts.filter(shift => shift.date === day.date).map(shift => renderShift(shift))}

@@ -22,7 +22,6 @@ export const createWeek = (shifts) => {
             for (let i = 1; i <= 5; i++) {
                 const dayDate = new Date(startOfWeek);
                 dayDate.setDate(dayDate.getDate() + (i - 1));
-                console.log(dayDate.toISOString().split("T")[0], "test")
                 week.days.push({ day: weekDays[i], date: dayDate.toISOString().split("T")[0] });
             }
 
