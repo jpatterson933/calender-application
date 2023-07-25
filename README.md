@@ -1,30 +1,33 @@
-# Jeffery William Patterson
+# [![Visual Studio Code](https://img.shields.io/badge/--007ACC?logo=visual%20studio%20code&logoColor=ffffff)](https://code.visualstudio.com/) Jeff Patterson [![GitHub](https://img.shields.io/badge/--181717?logo=github&logoColor=ffffff)](https://github.com/) [![JavaScript](https://img.shields.io/badge/--F7DF1E?logo=javascript&logoColor=000)](https://www.javascript.com/)
 
 # calender-application
-This is a very simple nine to five calendar application for logging events for the day.
+This is a very simple nine to five calendar application for logging events for the day. However, I am now transitioning this to a full stack application that will assist with picking up sub shifts in any timezone for edx full stack development bootcamp courses.
 
-# 9-5 Daily Planner
-Nine to Five Daily Planner
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Link to deployed webpage: https://jpatterson933.github.io/calender-application/
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 
-Link to repository: https://github.com/jpatterson933/calender-application
+[![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)
 
+# Current Progress
+I am currently working on implementing all queries for graphql from backend to frontend. The MVP will most likely not include user authentication, but instead, I can use this app personally to keep track of my scheduled shifts at edx. I might even begin to use it just to keep track of my work as well. I believe the idea behind this is that I want an extremely personizable calender that works exactly for me. Especially considering that I will ned to constantly work in different time zones.
 
-### My webpage can accomplish the list of things below.
+# Weekly planner for full stack. User directions below. 
 
-1. The top banner provides the user with a title and the current date and time that they will use the nine to five planner.
-    A. Within the banner is a clear all button. This button will allow the user to clear all tasks and events that have been scheduled. Placed at the top so when the page is loaded at the beginning of their day they can clear page and start new day.
-        I. ![A user clicks on slots on the Clear Entire Day button and clears all hours](./assets/videos/clear-all.gif)
-***
-2. When the user enters text and clicks save. The text/task they input will stay even if they refresh the page.
-    A: ![A user clicks on the save button and when the page reloads, their task is still there](./assets/videos/save-tasks.gif)
-***
-3. When the user clicks on the time button, the tasks inputted and saved will be cleared ONLY in the specific time slot. Time button also has a tooltip to let the user know that it serves a secondary purpose other than displaying the time.
-    A: ![A user clicks on the time to clear that specific slot and sees a tooltip](./assets/videos/clear-single-hour.gif)
-***
-4. When a user views the page, past hours will be greyed, current hour will be red, and future hours will be green.
-    A: This function works but is only viewable during the hours nine-five. I finished this readme after hours and the project is due soon however from the videos above you can see all hours are grey.
-***
-5. The window can be any size and all elements within will adjust and fit properly.
-    A: ![Small Window Size](./assets/images/window-shrink.png)
+I want to be able to add new weeks.
+    - Simply click a button and a new 7 days will pop up and save itself.
+I want old weeks to remove themselves when the dates are no longer relevant.
+    - I want a screen to show 'future weeks'
+    - old weeks will be archived
+I want each day to be able to see my availability to the relevant timezones for each day. 
+I want to be able to add shifts with in its relevant times zone
+    - when the shifts are added, my availability for the other time zones will be automatically updated
+
+I will need a backend database that saves data. This will require routes, as well data washing. I will most likely have a sign in form that requires the user to sign in in order to access their account homepage. There will only be 1 page to view.
+
+# What is the MVP?
+1. USER should be able to login and view a page that says hello and the information will be saved in a database. User will be automatically logged out after several minutes. (Although User story is me and I want an extremely personal calender instead of the conflated calendars that I am barely used too with more features than I will ever need.)
+
+# Issues
+Issues are being added. Check issues abover for more details.
+
