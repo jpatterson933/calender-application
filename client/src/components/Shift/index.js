@@ -16,82 +16,74 @@ export const Shift = () => {
         return createWeek(shifts);
     }, [shifts]);
 
-
-    const renderShift = (shift) => {
-        // time slots from 5am to 9pm pacific time
-        const pacificTimeSlots = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
-
-        // Split the startTime and endTime strings on the ":" character to get the hour value
-        const startHour = parseInt(shift.startTime.split(":")[0]);
-        const endHour = parseInt(shift.endTime.split(":")[0]);
-        
-        // const startMeridian = shift.startTime.split(":")[1].split(" ")[1]
-        // const endMeridian = shift.endTime.split(":")[1].split(" ")[1]
+    function returnHour(time) {
+        return parseInt(time.split(":")[0])
+    }
 
 
 
+    function showWeeks() {
 
-        // Find the index of the corresponding time slots in the pacificTimeSlots array
-        const startIndex = pacificTimeSlots.indexOf(startHour);
-        const endIndex = pacificTimeSlots.indexOf(endHour);
+        function renderPacificTimeSlots(shift){
+            const startHour = returnHour(shift.startTime);
+            const endHour = returnHour(shift.endTime);
+            const pacificTimeSlots = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
 
-        // Render the shift with the matching time slots on the right side
-        return (
-            <section key={shift._id}>
-                <div>
-                    {pacificTimeSlots.map(time => {
+            const timeSlotsJSX = pacificTimeSlots.map(time => {
+                if (time >= startHour && time <= endHour) {
+                    return <div data-time={time} key={time} style={{ color: "green", backgroundColor: "lightblue" }}>{time}</div>;
+                } else
+                    return <div key={time}>{time}</div>;
+            });
 
-                        if (time === startHour) {
-                            return <div style={{ color: "green" }}>{time}</div>
-                        } else
-                            return <div>{time}</div>
-                    })}
-                </div>
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                    {/* Render the time slots on the right side */}
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                        {pacificTimeSlots.slice(startIndex, endIndex + 1).map(slot => (
-                            <div key={slot} style={{ border: "1px solid black", padding: "1rem", margin: "1rem" }}>
-                                {slot}:00
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        );
-    };
-
-    // console.log(renderShift)
-
-    const renderWeek = (week) => {
-        // console.log(week.days, "week.days")
-
-        const weekCardStyles = {
-            border: "1px dashed black",
-            padding: "0 1em",
-            margin: "0",
-            borderRadius: "24px"
+            return timeSlotsJSX;
         }
-        return week.days.map((day) => (
-            <div key={day.date} style={weekCardStyles}>
-                <h3>
-                    {day.day} <br></br> {formatDate(day.date)}
-                </h3>
-                {/* {console.log(shifts)} */}
-                {shifts.filter(shift => shift.date === day.date).map(shift => renderShift(shift))}
+
+        const renderShift = (shift) => {
+            return (
+                <section key={shift._id}>
+                    <div>{renderPacificTimeSlots(shift)}</div>
+                </section>
+            );
+        };
+
+        const renderWeek = (week) => {
+
+            function matchDateWithDayOfWeek(day){
+                const matchingDays = shifts.filter(shift => shift.date === day.date).map(shift => renderShift(shift));
+                return matchingDays;
+            }
+    
+            const weekCardStyles = {
+                border: "2px dashed black",
+                margin: "0",
+                padding: "5px"
+            }
+
+            const newWeekContainer = week.days.map((day) => (
+                <div key={day.date} style={weekCardStyles}>
+                    <h3>{day.day}</h3>
+                    <h3>{formatDate(day.date)}</h3>
+                    {matchDateWithDayOfWeek(day)}
+                    {/* {shifts.filter(shift => shift.date === day.date).map(shift => renderShift(shift))} */}
+                </div>
+            ));
+    
+            return newWeekContainer;
+        };
+
+        const weeksJsx = weeks.map((week, index) => (
+            <div key={index} style={{ display: "flex", flexDirection: "row" }}>
+                {renderWeek(week)}
             </div>
         ));
-    };
+
+        return weeksJsx;
+    }
 
     if (loading === false) {
         return (
-            <>
-                {weeks.map((week, index) => (
-                    <div key={index} style={{ display: "flex", flexDirection: "row" }}>
-                        {renderWeek(week)}
-                    </div>
-                ))}
-            </>
+            <>{showWeeks()}</>
         );
     } else {
         return <div>Loading...</div>;

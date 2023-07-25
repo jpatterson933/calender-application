@@ -15,8 +15,8 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      {/* <Shift /> */}
       <AddShift />
+      <Shift />
     </ApolloProvider>
   );
 }

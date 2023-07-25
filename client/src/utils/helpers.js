@@ -1,3 +1,5 @@
+
+
 export const createWeek = (shifts) => {
     const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     // initiate empty weeks array
@@ -19,14 +21,14 @@ export const createWeek = (shifts) => {
             // when a new week is created it will plug in five days with date formate 2023-mm-dd
             for (let i = 1; i <= 5; i++) {
                 const dayDate = new Date(startOfWeek);
-                dayDate.setDate(dayDate.getDate() + (i - 1));
+                // subtracting i - 2 fixes date bug .. but why?
+                dayDate.setDate(dayDate.getDate() + (i - 2));
                 week.days.push({ day: weekDays[i], date: dayDate.toISOString().split("T")[0] });
             }
 
             weeks.push(week);
         }
     });
-    // console.log(weeks)
     return weeks;
 };
 
@@ -36,5 +38,4 @@ export const formatDate = (date) => {
     const day = date.split("-")[2]
 
     return `${month}/${day}/${year}`
-}
-
+};
