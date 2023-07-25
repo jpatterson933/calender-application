@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_SHIFTS } from "../../utils/queries";
-import {createWeek, formatDate} from "../../utils/helpers";
+import { createWeek, formatDate } from "../../utils/helpers";
 // import {createWeek} from "../../utils/createWeek";
 // import {formatDate} from "../../utils/formatDate";
 
@@ -10,11 +10,11 @@ export const Shift = () => {
     // this ensures we all use one instance of the shifts data. this prevents high memory usage and potential volatility
     const shifts = useMemo(() => {
         return data?.shifts || [];
-    }, [data])
+    }, [data]) // if something in data changes, this will be recaluclated
 
     const weeks = useMemo(() => {
         return createWeek(shifts);
-    }, [shifts]);
+    }, [shifts]); // so if something in shifts changes, this will be recalculated
 
     function returnHour(time) {
         return parseInt(time.split(":")[0])
@@ -24,7 +24,7 @@ export const Shift = () => {
 
     function showWeeks() {
 
-        function renderPacificTimeSlots(shift){
+        function renderShift(shift) {
             const startHour = returnHour(shift.startTime);
             const endHour = returnHour(shift.endTime);
             const pacificTimeSlots = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
@@ -36,24 +36,20 @@ export const Shift = () => {
                     return <div key={time}>{time}</div>;
             });
 
-            return timeSlotsJSX;
-        }
-
-        const renderShift = (shift) => {
             return (
-                <section key={shift._id}>
-                    <div>{renderPacificTimeSlots(shift)}</div>
-                </section>
-            );
-        };
+            <section key={shift._id}>
+                <div>{timeSlotsJSX}</div>
+            </section>
+            )
+        }
 
         const renderWeek = (week) => {
 
-            function matchDateWithDayOfWeek(day){
+            function matchDateWithDayOfWeek(day) {
                 const matchingDays = shifts.filter(shift => shift.date === day.date).map(shift => renderShift(shift));
                 return matchingDays;
             }
-    
+
             const weekCardStyles = {
                 border: "2px dashed black",
                 margin: "0",
@@ -68,7 +64,7 @@ export const Shift = () => {
                     {/* {shifts.filter(shift => shift.date === day.date).map(shift => renderShift(shift))} */}
                 </div>
             ));
-    
+
             return newWeekContainer;
         };
 

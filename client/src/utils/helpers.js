@@ -22,13 +22,25 @@ export const createWeek = (shifts) => {
             for (let i = 1; i <= 5; i++) {
                 const dayDate = new Date(startOfWeek);
                 // subtracting i - 2 fixes date bug .. but why?
+                console.log(dayDate.getDate() - 2)
                 dayDate.setDate(dayDate.getDate() + (i - 2));
                 week.days.push({ day: weekDays[i], date: dayDate.toISOString().split("T")[0] });
             }
-
+            console.log(week)
             weeks.push(week);
         }
     });
+    /**
+     * const week = {
+                start: weekStart,
+                days: [
+                    {   
+                        day: "Monday",
+                        date: '2023-04-03
+                    }
+                ]
+            };
+     */
     return weeks;
 };
 
