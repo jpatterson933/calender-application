@@ -23,10 +23,7 @@ const ShiftSchema = new mongoose.Schema({
 });
 
 ShiftSchema.pre("save", function (next) {
-    const timeZoneAdjustments = {
-        mountain: 1,
-    }
-
+    
     const timezoneMap = {
         "pacific": 0,
         "mountain": 1, 
