@@ -1,49 +1,56 @@
+import { previousMonday, isMonday, addDays } from "date-fns";
+import { zonedTimeToUtc } from "date-fns-tz";
 
+// recursive function to build work week from Monday to Friday
+function buildWorkWeek(startDate, datesArray = []) {
+    if (datesArray.length === 5) {
+        return datesArray;
+    }
 
-export const createWeek = (shifts) => {
-    const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    // initiate empty weeks array
-    const weeks = [];
+    datesArray.push(startDate);
+    const nextDay = addDays(startDate, 1);
+    const convertToDate = new Date(nextDay);
 
-    shifts.forEach((shift) => {
-        const currentDate = new Date(shift.date);
-        const currentDay = currentDate.getDay();
-        const startOfWeek = new Date(currentDate.setDate(currentDate.getDate() - (currentDay - 1)));
-
-        const weekStart = startOfWeek.toISOString().split("T")[0];
-        // console.log("Date information", weekStart)
-        // here we get the dates that start for the week, and it will set up a new week object with an empty array for five days
-        if (!weeks.find((week) => week.start === weekStart)) {
-            const week = {
-                start: weekStart,
-                days: []
-            };
-            // when a new week is created it will plug in five days with date formate 2023-mm-dd
-            for (let i = 1; i <= 5; i++) {
-                const dayDate = new Date(startOfWeek);
-                // subtracting i - 2 fixes date bug .. but why?
-                console.log(dayDate.getDate() - 2)
-                dayDate.setDate(dayDate.getDate() + (i - 2));
-                week.days.push({ day: weekDays[i], date: dayDate.toISOString().split("T")[0] });
-            }
-            console.log(week)
-            weeks.push(week);
-        }
-    });
-    /**
-     * const week = {
-                start: weekStart,
-                days: [
-                    {   
-                        day: "Monday",
-                        date: '2023-04-03
-                    }
-                ]
-            };
-     */
-    return weeks;
+    return buildWorkWeek(convertToDate, datesArray);
 };
 
+function removeAutoLocalTime(dateObj){
+    dateObj.setHours(0, 0, 0, 0)
+    return dateObj;
+    
+}
+
+
+export const createEmptyWeeksWithShifts = (shifts) => {
+
+    const weeks = shifts.map(shift => {
+        console.log(shift.date)
+        let shiftDateObj = new Date(shift.date);
+
+        shiftDateObj = removeAutoLocalTime(shiftDateObj)
+
+        // console.log(shiftDateObj, "shiftDateObj")
+        const shiftOnMonday = isMonday(shiftDateObj);
+
+
+        let thisIsMonday;
+        if (!shiftOnMonday) {
+            thisIsMonday = previousMonday(shiftDateObj);
+
+        } else if (shiftOnMonday) {
+            thisIsMonday = shiftDateObj;
+        }
+        return buildWorkWeek(thisIsMonday)
+    });
+
+    const uniqueWeeks = weeks.filter((week, index, self) => {
+        return index === self.findIndex((w) => JSON.stringify(w) === JSON.stringify(week))
+    })
+    return uniqueWeeks;
+};
+
+// deprecated // unused for now as date formatting has completely changed
+// might delete //
 export const formatDate = (date) => {
     const year = date.split("-")[0]
     const month = date.split("-")[1]

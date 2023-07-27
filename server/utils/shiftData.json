@@ -1,20 +1,45 @@
 [
     {
         "date": "2023-03-29",
-        "timezone": "Pacific",
-        "startTime": "17:45 PM",
-        "endTime": "20:00 PM"
+        "timezone": "pacific",
+        "startTime": "17:45",
+        "endTime": "20:00"
     },
     {
         "date": "2023-03-30",
-        "timezone": "Pacific",
-        "startTime": "17:45 PM",
-        "endTime": "20:00 PM"
+        "timezone": "pacific",
+        "startTime": "17:45",
+        "endTime": "20:00"
     },
     {
         "date": "2023-04-04",
-        "timezone": "Eastern",
-        "startTime": "9:15 AM",
-        "endTime": "15:30 PM"
+        "timezone": "eastern",
+        "startTime": "9:15",
+        "endTime": "15:30"
+    }, 
+    {
+        "date": "2023-07-27",
+        "timezone": "eastern",
+        "startTime": "17:45",
+        "endTime": "22:00"
+    },
+    {
+        "date": "2023-07-27",
+        "timezone": "mountain",
+        "startTime": "17:45",
+        "endTime": "22:00"
+    },
+    {
+        "date": "2023-07-26",
+        "timezone": "GMT/BST",
+        "startTime": "17:45",
+        "endTime": "22:00"
+    },
+    {
+        "date": "2023-07-23",
+        "timezone": "central",
+        "startTime": "17:45",
+        "endTime": "22:00"
     }
+    
 ]
