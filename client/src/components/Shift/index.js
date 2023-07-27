@@ -8,6 +8,7 @@ import Table from "react-bootstrap/Table";
 
 export const Shift = () => {
     const { loading, data } = useQuery(QUERY_SHIFTS);
+    // set up state for shifts
     // this ensures we all use one instance of the shifts data. this prevents high memory usage and potential volatility
     const shifts = useMemo(() => {
         return data?.shifts || [];
@@ -17,9 +18,7 @@ export const Shift = () => {
         return createEmptyWeeksWithShifts(shifts);
     }, [shifts]); // so if something in shifts changes, this will be recalculated
 
-
     function renderTableHeaderDates() {
-        console.log(weeks, "weeks? wtf is this")
         return (
             <thead>
                 {weeks.map((week, index) => (
@@ -35,8 +34,6 @@ export const Shift = () => {
             </thead>
         )
     }
-
-
 
     if (loading === false) {
         return (

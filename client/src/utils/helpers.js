@@ -24,7 +24,6 @@ function removeAutoLocalTime(dateObj){
 export const createEmptyWeeksWithShifts = (shifts) => {
 
     const weeks = shifts.map(shift => {
-        console.log(shift.date)
         let shiftDateObj = new Date(shift.date);
 
         shiftDateObj = removeAutoLocalTime(shiftDateObj)
