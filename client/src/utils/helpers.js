@@ -1,5 +1,4 @@
 import { previousMonday, isMonday, addDays } from "date-fns";
-import { zonedTimeToUtc } from "date-fns-tz";
 
 // recursive function to build work week from Monday to Friday
 function buildWorkWeek(startDate, datesArray = []) {

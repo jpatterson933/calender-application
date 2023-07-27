@@ -27,19 +27,27 @@ ShiftSchema.pre("save", function (next) {
         mountain: 1,
     }
 
-    if (this.timezone === "mountain") {
-        let startHour = this.startTime.split(":")[0];
-        let startMinute = this.startTime.split(":")[1]
-        let endHour = this.endTime.split(":")[0];
-        let endMinute = this.endTime.split(":")[1]
+    const timezoneMap = {
+        "pacific": 0,
+        "mountain": 1, 
+        "central": 2, 
+        "eastern": 3,
+        "GMT/BST": 9,
+    }
 
-        const convertedStartTime = startHour - timeZoneAdjustments.mountain;
-        const convertedEndTime = endHour - timeZoneAdjustments.mountain
+    const convertedTimezone = timezoneMap[this.timezone];
+
+    if (convertedTimezone) {
+
+        const [startHour, startMinute] = this.startTime.split(":");
+        const [endHour, endMinute] = this.endTime.split(":");
+        const convertedStartTime = Number(startHour) - convertedTimezone;
+        const convertedEndTime = Number(endHour) - convertedTimezone;
 
         this.startTime = `${convertedStartTime}:${startMinute}`;
         this.endTime = `${convertedEndTime}:${endMinute}`;
 
-        this.timezone = "convertedMountain";
+        this.timezone = `converted|${this.timezone}`;
 
     }
     next();
