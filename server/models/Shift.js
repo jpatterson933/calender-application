@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 // I can add a hook here to convert start and end time to pacific time
 // save the timezone as convertedX with x being the timezone
-const ShiftSchema = new mongoose.Schema({
+const shiftSchema = new mongoose.Schema({
     date: {
-        type: String,
+        type: Date,
         required: true
     },
     timezone: {
@@ -20,14 +20,20 @@ const ShiftSchema = new mongoose.Schema({
         required: true
     }
 
-});
+},
+    {
+        toJSON: {
+            virtuals: true
+        }
+    }
+);
 
-ShiftSchema.pre("save", function (next) {
-    
+shiftSchema.pre("save", function (next) {
+
     const timezoneMap = {
         "pacific": 0,
-        "mountain": 1, 
-        "central": 2, 
+        "mountain": 1,
+        "central": 2,
         "eastern": 3,
         "GMT/BST": 9,
     }
@@ -50,6 +56,6 @@ ShiftSchema.pre("save", function (next) {
     next();
 })
 
-const Shift = mongoose.model("Shift", ShiftSchema);
 
-module.exports = Shift;
+
+module.exports = shiftSchema;

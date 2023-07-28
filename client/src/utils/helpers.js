@@ -13,7 +13,8 @@ function buildWorkWeek(startDate, datesArray = []) {
     return buildWorkWeek(convertToDate, datesArray);
 };
 
-function removeAutoLocalTime(dateObj){
+export function removeAutoLocalTime(dateObject){
+    let dateObj = new Date(dateObject)
     dateObj.setHours(0, 0, 0, 0)
     return dateObj;
     
@@ -23,11 +24,8 @@ function removeAutoLocalTime(dateObj){
 export const createEmptyWeeksWithShifts = (shifts) => {
 
     const weeks = shifts.map(shift => {
-        let shiftDateObj = new Date(shift.date);
+        let shiftDateObj = removeAutoLocalTime(shift.date)
 
-        shiftDateObj = removeAutoLocalTime(shiftDateObj)
-
-        // console.log(shiftDateObj, "shiftDateObj")
         const shiftOnMonday = isMonday(shiftDateObj);
 
 
@@ -56,3 +54,4 @@ export const formatDate = (date) => {
 
     return `${month}/${day}/${year}`
 };
+

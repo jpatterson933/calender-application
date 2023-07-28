@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_SHIFTS } from "../../utils/queries";
-import { createEmptyWeeksWithShifts } from "../../utils/helpers";
+import { createEmptyWeeksWithShifts, removeAutoLocalTime } from "../../utils/helpers";
 // bootstrap imports
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from "react-bootstrap/Table";
@@ -13,7 +13,7 @@ export const Shift = () => {
     const shifts = useMemo(() => {
         return data?.shifts || [];
     }, [data]) // if something in data changes, this will be recaluclated
-    console.log(shifts, "shifts")
+
     const weeks = useMemo(() => {
         return createEmptyWeeksWithShifts(shifts);
     }, [shifts]); // so if something in shifts changes, this will be recalculated
@@ -40,19 +40,37 @@ export const Shift = () => {
         )
     }
 
+    // {weeks.map((week, index) => {
+    //     console.log(week)
+    //     return (
+    //         <tr key={index}>
+    //                 {shifts.map((shift, shiftIndex) => {
+    //                     const dateString = removeAutoLocalTime(shift.date);
+    //                     console.log(dateString, "date stirng ------------------")
+                        
+    //                     const matchingDay = week.filter((day) => day === dateString);
+    //                     console.log(matchingDay, "test")
+    //                     if(matchingDay){
+    //                         console.log("please work");
+    //                         return <td key={shiftIndex}>{matchingDay}</td>
+    //                     } else {
+    //                         console.log("did not work");
+    //                         return <td key={shiftIndex}>{matchingDay}</td>
+    //                     }
+    //                 })}
+    //         </tr>
+
+    //     )
+    // })}
     function renderTableBody() {
         return (
             <tbody>
-                {weeks.map((week, index) => {
-                    console.log(week)
-                    return (
-                        <tr>
-                            {week.map((day, index) => {
-                                shifts.filter(shift => (new Date(shift.date)) === day).map(s => <td>s{s}</td>)
-                            })}
-                        </tr>
-
-                    )
+                {shifts.map((shift, index) => {
+                    const dateString = removeAutoLocalTime(shift.date);
+                    let test2 = weeks.flatMap((week, index) => {
+                        return week.filter(day => day === dateString);
+                    })
+                    console.log(test2, "hmmm")
                 })}
             </tbody>
         )
