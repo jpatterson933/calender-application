@@ -13,7 +13,7 @@ export const Shift = () => {
     const shifts = useMemo(() => {
         return data?.shifts || [];
     }, [data]) // if something in data changes, this will be recaluclated
-
+    console.log(shifts, "shifts")
     const weeks = useMemo(() => {
         return createEmptyWeeksWithShifts(shifts);
     }, [shifts]); // so if something in shifts changes, this will be recalculated
@@ -21,17 +21,40 @@ export const Shift = () => {
     function renderTableHeaderDates() {
         return (
             <thead>
-                {weeks.map((week, index) => (
-                    <tr key={index}>
-                        {week.map((day, index) => {
-                            let stringDate = day.toString();
-                            return (
-                                <th key={index}>{stringDate}</th>
-                            )
-                        })}
-                    </tr>
-                ))}
+                {weeks.map((week, index) => {
+
+                    return (
+                        <tr key={index}>
+                            {week.map((day, index) => {
+                                let stringDate = day.toString();
+                                return (
+                                    <th key={index}>{stringDate}</th>
+                                )
+                            })}
+                        </tr>
+                    )
+                }
+                )}
+
             </thead>
+        )
+    }
+
+    function renderTableBody() {
+        return (
+            <tbody>
+                {weeks.map((week, index) => {
+                    console.log(week)
+                    return (
+                        <tr>
+                            {week.map((day, index) => {
+                                shifts.filter(shift => (new Date(shift.date)) === day).map(s => <td>s{s}</td>)
+                            })}
+                        </tr>
+
+                    )
+                })}
+            </tbody>
         )
     }
 
@@ -39,6 +62,7 @@ export const Shift = () => {
         return (
             <Table striped bordered hover variant="dark">
                 {renderTableHeaderDates()}
+                {renderTableBody()}
             </Table>
         );
     } else {
