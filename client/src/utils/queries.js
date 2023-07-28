@@ -19,6 +19,7 @@ export const QUERY_WEEKS = gql`
             dates
             savedShifts {
                 _id
+                date
                 timezone
                 startTime
                 endTime
