@@ -1,14 +1,17 @@
 
+const { async } = require('rxjs');
 const { Week, Shift } = require('../models');
-import { previousMonday, isMonday, addDays } from "date-fns";
+const { previousMonday, isMonday, parseISO } = require("date-fns");
 
 function getMondayDate(shiftDate){
-    let isMondayBoolean = isMonday(shiftDate);
+    let date = parseISO(shiftDate)
+
+    let isMondayBoolean = isMonday(date);
 
     if(isMondayBoolean){
-        return shiftDate;
+        return date;
     } else {
-        return previousMonday(shiftDate);
+        return previousMonday(date);
     }
 
 }
@@ -16,14 +19,23 @@ function getMondayDate(shiftDate){
 const resolvers = {
     Query: {
         shifts: async () => {
-            return await Shift.find({})
+            return await Shift.find({});
+        },
+        weeks: async() => {
+            return await Week.find({});
         }
     },
     Mutation: {
         addShift: async (parent, {date, timezone, startTime, endTime}) => {
+            const existingShift = await Shift.findOne({date: date, startTime: startTime})
+            if(existingShift){
+                throw new Error("A shift with the same date and time already exists buddy!");
+            }
             const newShift = await Shift.create({date, timezone, startTime, endTime});
-
+            // console.log(date, )
             const mondayDate = getMondayDate(date);
+            console.log(mondayDate)
+            console.log(newShift, existingShift)
 
             let week = await Week.findOne({"dates.0": mondayDate})
 
