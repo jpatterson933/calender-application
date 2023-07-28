@@ -1,7 +1,9 @@
 import React, { useMemo } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_WEEKS } from "../../utils/queries";
-// import { createEmptyWeeksWithShifts, removeAutoLocalTime } from "../../utils/helpers";
+
+import {utcToZonedTime} from "date-fns-tz";
+import { createEmptyWeeksWithShifts, removeAutoLocalTime } from "../../utils/helpers";
 // bootstrap imports
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from "react-bootstrap/Table";
@@ -21,48 +23,40 @@ export const Week = () => {
         return convertedDateString;
     }
 
-    // {weeks.map((week, index) => (
-    //     <>
-    //         <thead>
-
-    //             <tr key={index}>
-    //                 {week.dates.map((day, dayIndex) => {
-    //                     let readableDate = getDateString(day);
-    //                     let stringDate = String(readableDate)
-    //                     console.log(stringDate, 'readable date')
-    //                     return (
-    //                         <td key={dayIndex}>
-    //                             {stringDate}
-    //                         </td>
-    //                     )
-    //                 })}
-    //             </tr>
-    //         </thead>
-    //         <tbody>
-    //             {week.savedShifts.map((shift, shiftIndex) => {
-    //                 // console.log(shift, "shift?")
-    //                 let readableDate = getDateString(shift.date);
-    //                 let stringDate = String(readableDate).split(" 17")[0]
-    //                 return (
-    //                     <tr>
-    //                         <td>{stringDate} {shift.startTime} {shift.endTime}</td>
-    //                     </tr>
-    //                 )
-    //             })}
-    //         </tbody>
-    //     </>
-    // ))}
+    function convertTimestampToPacific(timestamp){
+        let date = new Date(Number(timestamp));
+        let dateInPacificTime = utcToZonedTime(date, 'America/Los_Angeles')
+        let noTimeOnDate = removeAutoLocalTime(dateInPacificTime)
+        console.log()
+        return noTimeOnDate;
+    }
 
     function renderTable() {
         return (
             weeks.map((week, index) => {
                 const shiftsForWeek = week.dates.map(date => {
-                    const shiftForDate = week.savedShifts.find(shift => shift.date === date);
+                    const convertedDate = convertTimestampToPacific(date);
+                    console.log(convertedDate)
+                    // const pacificDateTimeStamp = convertTimestampToPacific(shift.date);
+                    const shiftForDate = week.savedShifts.find(shift => {
+                        let convertedTimestamp = convertTimestampToPacific(shift.date);
+                        console.log(convertedTimestamp)
+                        let stringTimeStamp = String(convertedTimestamp);
+                        let stringDate = String(convertedDate)
+                        if(stringTimeStamp === stringDate){
+                            
+                            return shift;
+                        }
+                    });
+                    // console.log(date, "date")
+                    // console.log(getDateString(date), date, "date string????")
                     return shiftForDate
-                    ? `${new Date(Number(date)).toLocaleDateString()} - ${shiftForDate.startTime} - ${shiftForDate.endTime}`
-                    : null;
-                })
+                        ? `${convertedDate} - ${shiftForDate.startTime} - ${shiftForDate.endTime}`
+                        : null;
 
+
+                })
+                console.log(shiftsForWeek, "shiftworkweek")
                 return (
                     <Table striped bordered hover variant="dark" key={index}>
                         <thead>

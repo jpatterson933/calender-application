@@ -4,6 +4,12 @@ const db = require('../config/connection');
 const shiftData = require('./shiftData.json');
 const { Week, Shift } = require('../models');
 
+function removeAutoLocalTime(date){
+    let dateObj = new Date(date)
+    dateObj.setHours(0, 0, 0, 0)
+    return dateObj;
+    
+}
 
 function getMondayDate(shiftDate) {
     let isMondayBoolean = isMonday(shiftDate);
@@ -27,7 +33,6 @@ db.once('open', async () => {
         const shifts = await Shift.create(shiftData)
 
         for (const shift of shifts) {
-
             let mondayDate = getMondayDate(shift.date);
 
             let week = await Week.findOne({ "dates.0": mondayDate })
@@ -42,7 +47,7 @@ db.once('open', async () => {
                     newDate.setDate(newDate.getDate() + i);
                     dates.push(newDate);
                 }
-
+                
                 const savedShifts = shifts.filter(shift => getMondayDate(shift.date).getTime() === mondayDate.getTime());
                 await Week.create({ dates, savedShifts })
             }
