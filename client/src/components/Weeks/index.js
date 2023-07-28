@@ -6,25 +6,67 @@ import { QUERY_WEEKS } from "../../utils/queries";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from "react-bootstrap/Table";
 
-export const Shift = () => {
+export const Week = () => {
+
     const { loading, data } = useQuery(QUERY_WEEKS);
-    // set up state for shifts
-    // this ensures we all use one instance of the shifts data. this prevents high memory usage and potential volatility
-    const shifts = useMemo(() => {
-        return data?.shifts || [];
-    }, [data]) // if something in data changes, this will be recaluclated
 
     const weeks = useMemo(() => {
+        console.log(data)
         return data?.weeks || [];
-    }, [shifts]); // so if something in shifts changes, this will be recalculated
+    }, [data]); // so if something in shifts changes, this will be recalculated
 
-    console.log(shifts, "inside weeks")
+    
+    function getDateString(date) {
+        const convertedDateString = new Date(Number(date));
+        return convertedDateString;
+    }
+
+    function renderTable() {
+        return (
+            <Table>
+                {weeks.map((week, index) => (
+                    <>
+                        <thead>
+
+                            <tr key={index}>
+                                {week.dates.map((day, dayIndex) => {
+                                    console.log(day, "day")
+                                    let readableDate = getDateString(day);
+                                    let stringDate = String(readableDate)
+                                    console.log(stringDate, 'readable date')
+                                    return (
+                                        <td key={dayIndex}>
+                                            {stringDate}
+                                        </td>
+                                    )
+                                })}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {week.savedShifts.map((shift, shiftIndex) => {
+                                // console.log(shift, "shift?")
+
+                                return (
+                                    <tr>
+                                        <td>{shift._id}</td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </>
+                ))}
+
+
+            </Table>
+        )
+    }
 
 
     if (loading === false) {
         return (
-            <Table striped bordered hover variant="dark">
-            </Table>
+            <>
+                {renderTable()}
+            </>
         );
     } else {
         return <div>Loading...</div>;
