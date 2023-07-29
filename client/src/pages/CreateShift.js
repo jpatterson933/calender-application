@@ -36,8 +36,6 @@ function AddShift(props) {
         if(name === "date"){
             const selectedDate = new Date(value);
             const day = selectedDate.getDay();
-            console.log(selectedDate, "selected Date");
-            console.log(day, "day of selected date");
 
             if (day === 5 || day === 6){
                 alert('Saturdays and Sundays are not allowed') // should bring in a module component that pops up and can be dismissed
