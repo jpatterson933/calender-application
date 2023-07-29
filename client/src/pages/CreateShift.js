@@ -33,6 +33,22 @@ function AddShift(props) {
     const handleChange = (event) => {
         const { name, value } = event.target;
 
+        if(name === "date"){
+            const selectedDate = new Date(value);
+            const day = selectedDate.getDay();
+            console.log(selectedDate, "selected Date");
+            console.log(day, "day of selected date");
+
+            if (day === 5 || day === 6){
+                alert('Saturdays and Sundays are not allowed') // should bring in a module component that pops up and can be dismissed
+                setFormState({
+                    ...formState,
+                    [name]: '' // clear the date input
+                });
+                return
+            }
+        }
+
         setFormState({
             ...formState,
             [name]: value
@@ -51,16 +67,18 @@ function AddShift(props) {
                     type="date"
                     id="date"
                     onChange={handleChange}
+                    value={formState.date}
+
                 />
 
                 <label htmlFor="timezone">Timezone</label>
-                <input
-                    placeholder="Timezone"
-                    name="timezone"
-                    type="timezone"
-                    id="timezone"
-                    onChange={handleChange}
-                />
+                <select id="timezone" name="timezone" onChange={handleChange}>
+                    <option value="pacific">Pacific</option>
+                    <option value="central">Central</option>
+                    <option value="mountain">Mountain</option>
+                    <option value="eastern">Eastern</option>
+                    <option value="GMT/BST">GMT/BST</option>
+                </select>
 
                 <label htmlFor="startTime">Start Time</label>
                 <input
