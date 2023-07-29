@@ -34,10 +34,10 @@ db.once('open', async () => {
         const shifts = await Shift.create(shiftData)
 
         for (const shift of shifts) {
-            const testDate = new Date(shift.date)
+            const dateObj = new Date(shift.date)
             const parsedDate = parseISO(shift.date)
             console.log(parsedDate, 'parsed date')
-            let mondayDate = getMondayDate(testDate);
+            let mondayDate = getMondayDate(dateObj);
             console.log(mondayDate, "monday date")
 
             let week = await Week.findOne({ "dates.0": mondayDate })

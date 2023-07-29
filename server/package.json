@@ -4,7 +4,7 @@
   "description": "This is a very simple nine to five calendar application for logging events for the day.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "seed": "node utils/seed.js",
     "start": "node server.js",
     "watch": "nodemon server.js"
@@ -20,6 +20,7 @@
     "mongoose": "^7.4.1"
   },
   "devDependencies": {
+    "jest": "^29.6.2",
     "nodemon": "^2.0.21"
   }
 }

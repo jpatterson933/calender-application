@@ -4,14 +4,13 @@ const { Week, Shift } = require('../models');
 const { previousMonday, isMonday, parseISO } = require("date-fns");
 
 function getMondayDate(shiftDate) {
-    let date = parseISO(shiftDate)
-
-    let isMondayBoolean = isMonday(date);
+    let parsedDate = new Date(shiftDate)
+    let isMondayBoolean = isMonday(parsedDate);
 
     if (isMondayBoolean) {
-        return date;
+        return parsedDate;
     } else {
-        return previousMonday(date);
+        return previousMonday(parsedDate);
     }
 
 }
@@ -34,12 +33,13 @@ const resolvers = {
                 throw new Error("A shift with the same date and time already exists buddy!");
             }
             const newShift = await Shift.create({ date, timezone, startTime, endTime });
-            // console.log(date, )
+            console.log(date)
             const mondayDate = getMondayDate(date);
-            // console.log(mondayDate)
+            console.log(mondayDate)
             // console.log(newShift, existingShift)
 
             let week = await Week.findOne({ "dates.0": mondayDate })
+            console.log(week)
 
             if (week) {
                 week.savedShifts.push(newShift);
@@ -54,6 +54,7 @@ const resolvers = {
                 }
 
                 week = await Week.create({ dates, savedShifts: [newShift] });
+                console.log(week) // this is sending back a saved shift
             }
 
 
