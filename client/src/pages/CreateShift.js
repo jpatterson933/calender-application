@@ -33,6 +33,12 @@ function AddShift(props) {
                 endTime: ''
             })
         } catch (error) {
+            setFormState({
+                date: '',
+                timezone: 'pacific',
+                startTime: '',
+                endTime: ''
+            })
             console.error("Error creating shift:", error.message);
         }
     }
