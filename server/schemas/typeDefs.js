@@ -11,8 +11,15 @@ const typeDefs = gql`
     endTime: String
   }
 
+  type Week {
+    _id: ID
+    dates: [String]
+    savedShifts: [Shift]
+  }
+
   type Query {
     shifts: [Shift]
+    weeks: [Week]
   }
 
   type Mutation {

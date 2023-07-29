@@ -14,15 +14,20 @@ function AddShift(props) {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        try {
+            console.log(formState)
 
-        await addShift({
-            variables: {
-                date: formState.date,
-                timezone: formState.timezone,
-                startTime: formState.startTime,
-                endTime: formState.endTime,
-            },
-        });
+            await addShift({
+                variables: {
+                    date: formState.date,
+                    timezone: formState.timezone,
+                    startTime: formState.startTime,
+                    endTime: formState.endTime,
+                },
+            });
+        } catch (error) {
+            console.error("Error creating shift:", error.message);
+        }
     }
 
     const handleChange = (event) => {
@@ -76,11 +81,6 @@ function AddShift(props) {
                 />
                 <button type="submit">Submit</button>
             </form>
-
-
-
-
-
         </div>
     )
 };

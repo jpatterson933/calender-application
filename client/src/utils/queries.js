@@ -11,3 +11,19 @@ export const QUERY_SHIFTS = gql`
         }
 }
 `
+
+export const QUERY_WEEKS = gql`
+    query{
+        weeks {
+            _id
+            dates
+            savedShifts {
+                _id
+                date
+                timezone
+                startTime
+                endTime
+              }
+        }
+    }
+`
