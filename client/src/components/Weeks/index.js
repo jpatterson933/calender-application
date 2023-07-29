@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_WEEKS } from "../../utils/queries";
 
-import {utcToZonedTime} from "date-fns-tz";
+import { utcToZonedTime, format } from "date-fns-tz";
 import { createEmptyWeeksWithShifts, removeAutoLocalTime } from "../../utils/helpers";
 // bootstrap imports
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,28 +23,32 @@ export const Week = () => {
         return convertedDateString;
     }
 
-    function convertTimestampToPacific(timestamp){
+    function convertTimestampToPacific(timestamp) {
         let date = new Date(Number(timestamp));
         let dateInPacificTime = utcToZonedTime(date, 'America/Los_Angeles')
         let noTimeOnDate = removeAutoLocalTime(dateInPacificTime)
-        console.log()
-        return noTimeOnDate;
+        // Format the date as 'YYYY-MM-DD'.
+        let formattedDate = format(noTimeOnDate, 'yyyy-MM-dd', { timeZone: 'America/Los_Angeles' });
+
+        return formattedDate;
     }
 
     function renderTable() {
         return (
             weeks.map((week, index) => {
                 const shiftsForWeek = week.dates.map(date => {
+                    console.log(date, "pre converted date")
                     const convertedDate = convertTimestampToPacific(date);
-                    console.log(convertedDate)
+                    console.log(convertedDate, "converted")
                     // const pacificDateTimeStamp = convertTimestampToPacific(shift.date);
                     const shiftForDate = week.savedShifts.find(shift => {
-                        let convertedTimestamp = convertTimestampToPacific(shift.date);
-                        console.log(convertedTimestamp)
-                        let stringTimeStamp = String(convertedTimestamp);
-                        let stringDate = String(convertedDate)
-                        if(stringTimeStamp === stringDate){
-                            
+                        console.log(shift.date, "shiftdate inside other function")
+                        // let convertedTimestamp = convertTimestampToPacific(shift.date);
+                        // console.log(convertedTimestamp, "convert")
+                        // let stringTimeStamp = String(convertedTimestamp);
+                        // let stringDate = String(convertedDate)
+                        if (shift.date === convertedDate) {
+
                             return shift;
                         }
                     });
