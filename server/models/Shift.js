@@ -30,29 +30,38 @@ const shiftSchema = new mongoose.Schema({
 
 shiftSchema.pre("save", function (next) {
 
-    const timezoneMap = {
-        "pacific": 0,
-        "mountain": 1,
-        "central": 2,
-        "eastern": 3,
-        "GMT/BST": 9,
+    function convertTime(time, offset) {
+        const [hour, minute] = time.split(":");
+        const convertedHour = Number(hour) - offset;
+        return `${convertedHour}:${minute}`;
     }
-
-    const convertedTimezone = timezoneMap[this.timezone];
-
-    if (convertedTimezone) {
-
-        const [startHour, startMinute] = this.startTime.split(":");
-        const [endHour, endMinute] = this.endTime.split(":");
-        const convertedStartTime = Number(startHour) - convertedTimezone;
-        const convertedEndTime = Number(endHour) - convertedTimezone;
-
-        this.startTime = `${convertedStartTime}:${startMinute}`;
-        this.endTime = `${convertedEndTime}:${endMinute}`;
-
-        this.timezone = `converted|${this.timezone}`;
-
+    
+    switch (this.timezone) {
+        case "mountain":
+            this.startTime = convertTime(this.startTime, 1);
+            this.endTime = convertTime(this.endTime, 1);
+            this.timezone = `converted|${this.timezone}`;
+            break;
+        case "central":
+            this.startTime = convertTime(this.startTime, 2);
+            this.endTime = convertTime(this.endTime, 2);
+            this.timezone = `converted|${this.timezone}`;
+            break;
+        case "eastern":
+            this.startTime = convertTime(this.startTime, 3);
+            this.endTime = convertTime(this.endTime, 3);
+            this.timezone = `converted|${this.timezone}`;
+            break;
+        case "GMT/BST":
+            this.startTime = convertTime(this.startTime, 9);
+            this.endTime = convertTime(this.endTime, 9);
+            this.timezone = `converted|${this.timezone}`;
+            break;
+        default:
+            // No conversion necessary for "pacific" or any other cases
+            break;
     }
+    
     next();
 })
 

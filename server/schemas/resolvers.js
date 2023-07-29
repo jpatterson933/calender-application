@@ -27,15 +27,17 @@ const resolvers = {
     },
     Mutation: {
         addShift: async (parent, { date, timezone, startTime, endTime }) => {
+            console.log(date, timezone, startTime, endTime);
             const existingShift = await Shift.findOne({ date: date, startTime: startTime })
             if (existingShift) {
+                console.log(existingShift)
                 throw new Error("A shift with the same date and time already exists buddy!");
             }
             const newShift = await Shift.create({ date, timezone, startTime, endTime });
             // console.log(date, )
             const mondayDate = getMondayDate(date);
-            console.log(mondayDate)
-            console.log(newShift, existingShift)
+            // console.log(mondayDate)
+            // console.log(newShift, existingShift)
 
             let week = await Week.findOne({ "dates.0": mondayDate })
 

@@ -5,7 +5,7 @@ import { ADD_SHIFT } from "../utils/mutations";
 function AddShift(props) {
     const [formState, setFormState] = useState({
         date: '',
-        timezone: '',
+        timezone: 'pacific',
         startTime: '',
         endTime: ''
     });
@@ -25,6 +25,13 @@ function AddShift(props) {
                     endTime: formState.endTime,
                 },
             });
+
+            setFormState({
+                date: '',
+                timezone: 'pacific',
+                startTime: '',
+                endTime: ''
+            })
         } catch (error) {
             console.error("Error creating shift:", error.message);
         }
@@ -32,12 +39,15 @@ function AddShift(props) {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
+        if (name === "startTime") {
+            console.log(value, 'starttime?')
+        }
 
-        if(name === "date"){
+        if (name === "date") {
             const selectedDate = new Date(value);
             const day = selectedDate.getDay();
 
-            if (day === 5 || day === 6){
+            if (day === 5 || day === 6) {
                 alert('Saturdays and Sundays are not allowed') // should bring in a module component that pops up and can be dismissed
                 setFormState({
                     ...formState,
@@ -46,6 +56,7 @@ function AddShift(props) {
                 return
             }
         }
+        console.log(name, value, "checking state")
 
         setFormState({
             ...formState,
@@ -66,11 +77,10 @@ function AddShift(props) {
                     id="date"
                     onChange={handleChange}
                     value={formState.date}
-
                 />
 
                 <label htmlFor="timezone">Timezone</label>
-                <select id="timezone" name="timezone" onChange={handleChange}>
+                <select id="timezone" name="timezone" value={formState.timezone} onChange={handleChange}>
                     <option value="pacific">Pacific</option>
                     <option value="central">Central</option>
                     <option value="mountain">Mountain</option>
@@ -85,6 +95,7 @@ function AddShift(props) {
                     type="time"
                     id="startTime"
                     onChange={handleChange}
+                    value={formState.startTime}
                 />
 
                 <label htmlFor="endTime">End Time</label>
@@ -94,6 +105,7 @@ function AddShift(props) {
                     type="time"
                     id="endTime"
                     onChange={handleChange}
+                    value={formState.endTime}
                 />
                 <button type="submit">Submit</button>
             </form>
