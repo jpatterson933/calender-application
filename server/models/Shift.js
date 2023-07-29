@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 // save the timezone as convertedX with x being the timezone
 const shiftSchema = new mongoose.Schema({
     date: {
-        type: Date,
+        type: String,
         required: true
     },
     timezone: {

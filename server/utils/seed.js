@@ -1,4 +1,4 @@
-const { previousMonday, isMonday, addDays } = require("date-fns");
+const { previousMonday, isMonday, addDays, parseISO } = require("date-fns");
 
 const db = require('../config/connection');
 const shiftData = require('./shiftData.json');
@@ -12,12 +12,13 @@ function removeAutoLocalTime(date){
 }
 
 function getMondayDate(shiftDate) {
-    let isMondayBoolean = isMonday(shiftDate);
+    let parsedDate = new Date(shiftDate)
+    let isMondayBoolean = isMonday(parsedDate);
 
     if (isMondayBoolean) {
-        return shiftDate;
+        return parsedDate;
     } else {
-        return previousMonday(shiftDate);
+        return previousMonday(parsedDate);
     }
 
 }
@@ -33,7 +34,11 @@ db.once('open', async () => {
         const shifts = await Shift.create(shiftData)
 
         for (const shift of shifts) {
-            let mondayDate = getMondayDate(shift.date);
+            const testDate = new Date(shift.date)
+            const parsedDate = parseISO(shift.date)
+            console.log(parsedDate, 'parsed date')
+            let mondayDate = getMondayDate(testDate);
+            console.log(mondayDate, "monday date")
 
             let week = await Week.findOne({ "dates.0": mondayDate })
 
