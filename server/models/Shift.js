@@ -1,5 +1,12 @@
 const mongoose = require("mongoose");
 
+
+function convertTime(time, offset) {
+    const [hour, minute] = time.split(":");
+    const convertedHour = Number(hour) - offset;
+    return `${convertedHour}:${minute}`;
+}
+
 // I can add a hook here to convert start and end time to pacific time
 // save the timezone as convertedX with x being the timezone
 const shiftSchema = new mongoose.Schema({
@@ -30,12 +37,8 @@ const shiftSchema = new mongoose.Schema({
 
 shiftSchema.pre("save", function (next) {
 
-    function convertTime(time, offset) {
-        const [hour, minute] = time.split(":");
-        const convertedHour = Number(hour) - offset;
-        return `${convertedHour}:${minute}`;
-    }
-    
+
+
     switch (this.timezone) {
         case "mountain":
             this.startTime = convertTime(this.startTime, 1);
@@ -61,10 +64,10 @@ shiftSchema.pre("save", function (next) {
             // No conversion necessary for "pacific" or any other cases
             break;
     }
-    
+
     next();
 })
 
 
 
-module.exports = shiftSchema;
+module.exports = { shiftSchema, convertTime };
