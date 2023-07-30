@@ -1,14 +1,12 @@
-const { previousMonday, isMonday, addDays, parseISO } = require("date-fns");
+const { previousMonday, isMonday, parseISO } = require("date-fns");
 
 const db = require('../config/connection');
 const shiftData = require('./shiftData.json');
 const { Week, Shift } = require('../models');
 
-function removeAutoLocalTime(date){
-    let dateObj = new Date(date)
-    dateObj.setHours(0, 0, 0, 0)
-    return dateObj;
-    
+async function emptyDatabases(){
+    await Shift.deleteMany({}); // empty collection
+    await Week.deleteMany({});
 }
 
 function getMondayDate(shiftDate) {
@@ -23,44 +21,50 @@ function getMondayDate(shiftDate) {
 
 }
 
-// seed shift data iwth current shifts
-db.once('open', async () => {
+function convertDateToIsoFormat(shift){
+    const dateObj = new Date(shift.date)
+    const mondayDate = getMondayDate(dateObj);
+    return mondayDate;
+}
 
+function createWeekDatesForWeek(mondayDate){
+    const dates = [];
+    for (let i = 0; i < 5; i++) {
+        const newDate = new Date(mondayDate);
+        newDate.setDate(newDate.getDate() + i);
+        dates.push(newDate);
+    }
+    return dates;
+}
+
+function findShiftsForWeekOfMondayDate(shifts, mondayDate){
+    const savedShifts = shifts.filter(shift => getMondayDate(shift.date).getTime() === mondayDate.getTime());
+    
+
+    return savedShifts;
+}
+
+
+async function seedDataWithShiftDateJson() {
     try {
-        await Shift.deleteMany({}); // empty collection
-        await Week.deleteMany({});
-
+        await emptyDatabases();
 
         const shifts = await Shift.create(shiftData)
 
         for (const shift of shifts) {
-            const dateObj = new Date(shift.date)
-            const parsedDate = parseISO(shift.date)
-            console.log(parsedDate, 'parsed date')
-            let mondayDate = getMondayDate(dateObj);
-            console.log(mondayDate, "monday date")
-
+            // const dateObj = new Date(shift.date)
+            let mondayDate = convertDateToIsoFormat(shift);
+            
             let week = await Week.findOne({ "dates.0": mondayDate })
-
             if (week) {
                 week.savedShifts.push(shift)
             } else {
+                let dates = createWeekDatesForWeek(mondayDate)
 
-                const dates = [];
-                for (let i = 0; i < 5; i++) {
-                    const newDate = new Date(mondayDate);
-                    newDate.setDate(newDate.getDate() + i);
-                    dates.push(newDate);
-                }
-                
-                const savedShifts = shifts.filter(shift => getMondayDate(shift.date).getTime() === mondayDate.getTime());
+                const savedShifts = findShiftsForWeekOfMondayDate(shifts, mondayDate);
                 await Week.create({ dates, savedShifts })
             }
         }
-
-
-
-
 
         console.log('all done!');
         process.exit(0);
@@ -68,5 +72,11 @@ db.once('open', async () => {
     } catch (err) {
         throw err;
     }
+}
+
+// seed shift data iwth current shifts
+db.once('open', async () => {
+    seedDataWithShiftDateJson()
+
 
 })
