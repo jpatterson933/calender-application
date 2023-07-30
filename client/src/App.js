@@ -1,7 +1,7 @@
 // import graph ql apollo client
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { Shift } from './components/Shift';
-import AddShift from './pages/CreateShift';
+import CreateShift from './pages/CreateShift';
 import { Week } from './components/Weeks';
 
 const httpLink = createHttpLink({
@@ -16,7 +16,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <AddShift />
+      <CreateShift />
       <Week />
     </ApolloProvider>
   );
