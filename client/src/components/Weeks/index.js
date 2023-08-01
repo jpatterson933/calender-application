@@ -19,39 +19,39 @@ export const Week = () => {
         return (
             sortedWeeks.map((week, index) => {
                 const shiftsForWeek = week.dates.map(date => {
-                    // console.log(week, "test")
-                    // const convertedDate = convertTimestampToPacific(date);
-                    const shiftsForDate = week.savedShifts.filter(shift => shift.date === date)
-                    // console.log(shiftForDate, 'tes')
-
-                    return shiftsForDate.map((shift, shiftIndex) => `Shift ${shiftIndex + 1}: ${shift.startTime} - ${shift.endTime}`).join(", ")
-
+                    // const shiftsForDate = week.savedShifts.filter(shift => shift.date === date)
+                    // return shiftsForDate.map((shift, shiftIndex) => `Shift ${shiftIndex + 1}: ${shift.startTime} - ${shift.endTime}`).join(", ")
+                    return week.savedShifts.filter(shift => shift.date === date)
                 })
-                // console.log(shiftsForWeek, "shifts wor week?")
                 return (
                     <Table striped bordered hover variant="dark" key={index}>
                         <thead>
                             <tr>
+                                <th></th>
                                 {week.dates.map((date, dateIndex) => (
                                     <th key={dateIndex}>{date}</th>
-
                                 ))}
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                {shiftsForWeek.map((shift, shiftIndex) => (
-                                    <td key={shiftIndex}>{shift}</td>
+                        {Array.from({ length: 22 - 5 }, (_, i) => i + 5).map(hour => (
+                            <tr key={hour}>
+                                <td>{hour}</td> {/* The hours column */}
+                                {shiftsForWeek.map((shiftsForDate, shiftIndex) => (
+                                    <td key={shiftIndex}>
+                                        {shiftsForDate.filter(shift => 
+                                            parseInt(shift.startTime.split(":")[0], 10) <= hour && parseInt(shift.endTime.split(":")[0], 10) > hour
+                                        ).length > 0 ? 'Shift' : ''}
+                                    </td>
                                 ))}
                             </tr>
-                        </tbody>
+                        ))}
+                    </tbody>
                     </Table>
                 )
             })
         );
     }
-
-
 
     if (loading === false) {
         return (
