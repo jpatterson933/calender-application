@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_SHIFT } from "../utils/mutations";
 
-function createShift(props) {
+function CreateShift(props) {
     const [formState, setFormState] = useState({
         date: '',
         timezone: 'pacific',
@@ -119,4 +119,4 @@ function createShift(props) {
     )
 };
 
-export default createShift;
+export default CreateShift;
