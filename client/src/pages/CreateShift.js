@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_SHIFT } from "../utils/mutations";
 
-function AddShift(props) {
+function createShift(props) {
     const [formState, setFormState] = useState({
         date: '',
-        timezone: '',
+        timezone: 'pacific',
         startTime: '',
         endTime: ''
     });
@@ -25,13 +25,44 @@ function AddShift(props) {
                     endTime: formState.endTime,
                 },
             });
+
+            setFormState({
+                date: '',
+                timezone: 'pacific',
+                startTime: '',
+                endTime: ''
+            })
         } catch (error) {
+            setFormState({
+                date: '',
+                timezone: 'pacific',
+                startTime: '',
+                endTime: ''
+            })
             console.error("Error creating shift:", error.message);
         }
     }
 
     const handleChange = (event) => {
         const { name, value } = event.target;
+        if (name === "startTime") {
+            console.log(value, 'starttime?')
+        }
+
+        if (name === "date") {
+            const selectedDate = new Date(value);
+            const day = selectedDate.getDay();
+
+            if (day === 5 || day === 6) {
+                alert('Saturdays and Sundays are not allowed') // should bring in a module component that pops up and can be dismissed
+                setFormState({
+                    ...formState,
+                    [name]: '' // clear the date input
+                });
+                return
+            }
+        }
+        console.log(name, value, "checking state")
 
         setFormState({
             ...formState,
@@ -51,16 +82,17 @@ function AddShift(props) {
                     type="date"
                     id="date"
                     onChange={handleChange}
+                    value={formState.date}
                 />
 
                 <label htmlFor="timezone">Timezone</label>
-                <input
-                    placeholder="Timezone"
-                    name="timezone"
-                    type="timezone"
-                    id="timezone"
-                    onChange={handleChange}
-                />
+                <select id="timezone" name="timezone" value={formState.timezone} onChange={handleChange}>
+                    <option value="pacific">Pacific</option>
+                    <option value="central">Central</option>
+                    <option value="mountain">Mountain</option>
+                    <option value="eastern">Eastern</option>
+                    <option value="GMT/BST">GMT/BST</option>
+                </select>
 
                 <label htmlFor="startTime">Start Time</label>
                 <input
@@ -69,6 +101,7 @@ function AddShift(props) {
                     type="time"
                     id="startTime"
                     onChange={handleChange}
+                    value={formState.startTime}
                 />
 
                 <label htmlFor="endTime">End Time</label>
@@ -78,6 +111,7 @@ function AddShift(props) {
                     type="time"
                     id="endTime"
                     onChange={handleChange}
+                    value={formState.endTime}
                 />
                 <button type="submit">Submit</button>
             </form>
@@ -85,4 +119,4 @@ function AddShift(props) {
     )
 };
 
-export default AddShift;
+export default createShift;

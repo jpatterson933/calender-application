@@ -2,8 +2,6 @@ import React, { useMemo } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_WEEKS } from "../../utils/queries";
 
-import { utcToZonedTime, format } from "date-fns-tz";
-import { removeAutoLocalTime } from "../../utils/helpers";
 // bootstrap imports
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from "react-bootstrap/Table";
@@ -16,39 +14,25 @@ export const Week = () => {
         return data?.weeks || [];
     }, [data]); // so if something in shifts changes, this will be recalculated
 
-
-    function convertTimestampToPacific(timestamp) {
-        let date = new Date(Number(timestamp));
-        let dateInPacificTime = utcToZonedTime(date, 'America/Los_Angeles')
-        let noTimeOnDate = removeAutoLocalTime(dateInPacificTime)
-        // Format the date as 'YYYY-MM-DD'.
-        let formattedDate = format(noTimeOnDate, 'yyyy-MM-dd', { timeZone: 'America/Los_Angeles' });
-
-        return formattedDate;
-    }
-
     function renderTable() {
         return (
             weeks.map((week, index) => {
                 const shiftsForWeek = week.dates.map(date => {
-                    const convertedDate = convertTimestampToPacific(date);
-                    const shiftForDate = week.savedShifts.find(shift => {
-                        if (shift.date === convertedDate) {
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    });
-                    return shiftForDate
-                        ? `${convertedDate} - ${shiftForDate.startTime} - ${shiftForDate.endTime}`
-                        : null;
+                    // console.log(week, "test")
+                    // const convertedDate = convertTimestampToPacific(date);
+                    const shiftsForDate = week.savedShifts.filter(shift => shift.date === date)
+                    // console.log(shiftForDate, 'tes')
+
+                    return shiftsForDate.map((shift, shiftIndex) => `Shift ${shiftIndex + 1}: ${shift.startTime} - ${shift.endTime}`).join(", ")
+
                 })
+                // console.log(shiftsForWeek, "shifts wor week?")
                 return (
                     <Table striped bordered hover variant="dark" key={index}>
                         <thead>
                             <tr>
                                 {week.dates.map((date, dateIndex) => (
-                                    <th key={dateIndex}>{new Date(Number(date)).toLocaleDateString()}</th>
+                                    <th key={dateIndex}>{date}</th>
 
                                 ))}
                             </tr>
