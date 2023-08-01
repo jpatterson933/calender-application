@@ -15,15 +15,16 @@ export const Week = () => {
     const weeks = useMemo(() => {
         return data?.weeks || [];
     }, [data]); // so if something in shifts changes, this will be recalculated
-
+    console.log(weeks, "weeks")
 
     function convertTimestampToPacific(timestamp) {
         let date = new Date(Number(timestamp));
+        date.setHours(date.getHours() + 12); // ensures we are in pacific time // this fixes the issue with sunday being returned for monday
         let dateInPacificTime = utcToZonedTime(date, 'America/Los_Angeles')
         let noTimeOnDate = removeAutoLocalTime(dateInPacificTime)
         // Format the date as 'YYYY-MM-DD'.
         let formattedDate = format(noTimeOnDate, 'yyyy-MM-dd', { timeZone: 'America/Los_Angeles' });
-
+        
         return formattedDate;
     }
 
@@ -31,6 +32,7 @@ export const Week = () => {
         return (
             weeks.map((week, index) => {
                 const shiftsForWeek = week.dates.map(date => {
+                    // console.log(week, "test")
                     const convertedDate = convertTimestampToPacific(date);
                     const shiftForDate = week.savedShifts.find(shift => {
                         if (shift.date === convertedDate) {
@@ -39,16 +41,18 @@ export const Week = () => {
                             return false;
                         }
                     });
+                    // console.log(shiftForDate, "shift for date ")
                     return shiftForDate
                         ? `${convertedDate} - ${shiftForDate.startTime} - ${shiftForDate.endTime}`
                         : null;
                 })
+                // console.log(shiftsForWeek, "shifts wor week?")
                 return (
                     <Table striped bordered hover variant="dark" key={index}>
                         <thead>
                             <tr>
                                 {week.dates.map((date, dateIndex) => (
-                                    <th key={dateIndex}>{new Date(Number(date)).toLocaleDateString()}</th>
+                                    <th key={dateIndex}>{convertTimestampToPacific(date)}</th>
 
                                 ))}
                             </tr>
@@ -56,7 +60,7 @@ export const Week = () => {
                         <tbody>
                             <tr>
                                 {shiftsForWeek.map((shift, shiftIndex) => (
-                                    <td key={shiftIndex}>{shift}</td>
+                                    <td key={shiftIndex}>{shift}test</td>
                                 ))}
                             </tr>
                         </tbody>
