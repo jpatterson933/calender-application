@@ -38,10 +38,11 @@ const resolvers = {
             }
             const newShift = await Shift.create({ date, timezone, startTime, endTime });
             const mondayDate = getMondayDate(date);
+            const mondayDateString = mondayDate.toISOString().split("T")[0];
             // console.log(newShift, existingShift)
             console.log(newShift, "new shift", mondayDate, "monday day")
-            let week = await Week.findOne({ "dates.0": mondayDate })
-            console.log(week)
+            let week = await Week.findOne({ "dates.0": mondayDateString })
+            console.log("----------start week", week, "end week -----------------")
 
             if (week) {
                 week.savedShifts.push(newShift);
@@ -52,7 +53,8 @@ const resolvers = {
                 for (let i = 0; i < 5; i++) {
                     const newDate = new Date(mondayDate);
                     newDate.setDate(newDate.getDate() + i);
-                    dates.push(newDate);
+                    const dateString = newDate.toISOString().split("T")[0];
+                    dates.push(dateString);
                 }
 
                 week = await Week.create({ dates, savedShifts: [newShift] });

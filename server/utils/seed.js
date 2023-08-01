@@ -7,6 +7,9 @@ const { Week, Shift } = require('../models');
 async function emptyDatabases(){
     await Shift.deleteMany({}); // empty collection
     await Week.deleteMany({});
+        
+    console.log('all done!');
+    process.exit(0);
 };
 
 function getMondayDate(shiftDate) {
@@ -65,5 +68,7 @@ async function seedDataWithShiftDateJson() {
 
 // seed shift data iwth current shifts
 db.once('open', async () => {
-    seedDataWithShiftDateJson();
+    // seedDataWithShiftDateJson();
+    emptyDatabases();
+// ctrl c to exist process until refactored
 });
