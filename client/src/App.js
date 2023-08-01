@@ -1,6 +1,5 @@
 // import graph ql apollo client
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
-import { Shift } from './components/Shift';
 import CreateShift from './pages/CreateShift';
 import { Week } from './components/Weeks';
 
