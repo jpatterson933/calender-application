@@ -19,8 +19,6 @@ export const Week = () => {
         return (
             sortedWeeks.map((week, index) => {
                 const shiftsForWeek = week.dates.map(date => {
-                    // const shiftsForDate = week.savedShifts.filter(shift => shift.date === date)
-                    // return shiftsForDate.map((shift, shiftIndex) => `Shift ${shiftIndex + 1}: ${shift.startTime} - ${shift.endTime}`).join(", ")
                     return week.savedShifts.filter(shift => shift.date === date)
                 })
                 return (
@@ -34,19 +32,19 @@ export const Week = () => {
                             </tr>
                         </thead>
                         <tbody>
-                        {Array.from({ length: 22 - 5 }, (_, i) => i + 5).map(hour => (
-                            <tr key={hour}>
-                                <td>{hour}</td> {/* The hours column */}
-                                {shiftsForWeek.map((shiftsForDate, shiftIndex) => (
-                                    <td key={shiftIndex}>
-                                        {shiftsForDate.filter(shift => 
-                                            parseInt(shift.startTime.split(":")[0], 10) <= hour && parseInt(shift.endTime.split(":")[0], 10) > hour
-                                        ).length > 0 ? 'Shift' : ''}
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
-                    </tbody>
+                            {Array.from({ length: 22 - 5 }, (_, i) => i + 5).map(hour => (
+                                <tr key={hour}>
+                                    <td>{hour}</td>
+                                    {shiftsForWeek.map((shiftsForDate, shiftIndex) => (
+                                        <td key={shiftIndex}>
+                                            {shiftsForDate.filter(shift =>
+                                                parseInt(shift.startTime.split(":")[0], 10) <= hour && parseInt(shift.endTime.split(":")[0], 10) > hour
+                                            ).length > 0 ? 'Shift' : '--'}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
                     </Table>
                 )
             })
