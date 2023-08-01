@@ -15,8 +15,9 @@ export const Week = () => {
     }, [data]); // so if something in shifts changes, this will be recalculated
 
     function renderTable() {
+        const sortedWeeks = [...weeks].sort((a, b) => new Date(a.dates[0]) - new Date(b.dates[0]));
         return (
-            weeks.map((week, index) => {
+            sortedWeeks.map((week, index) => {
                 const shiftsForWeek = week.dates.map(date => {
                     // console.log(week, "test")
                     // const convertedDate = convertTimestampToPacific(date);
