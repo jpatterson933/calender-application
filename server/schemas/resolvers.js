@@ -1,29 +1,19 @@
 
 const { async } = require('rxjs');
 const { Week, Shift } = require('../models');
-const { previousMonday, isMonday, parseISO } = require("date-fns");
 
 function getMondayDate(shiftDate) {
-    // let month = shiftDate.split("-")[1]
-    // let day = shiftDate.split("-")[2]
-    // console.log(year, month, day)
     let parsedDate = new Date(`${shiftDate}T00:00:00.000Z`)
-    let dateString = parsedDate.getDay();
+    let dayIndexValue = parsedDate.getDay();
 
-    
-
-   
-    console.log(`This is the date string: ${dateString}`)
-    // console.log(parsedDate.toLocaleDateString())
-    let isMondayBoolean = (dateString === 0) ? true : false;
+    let isMondayBoolean = (dayIndexValue === 0) ? true : false;
     console.log(`Is this a monday: ${isMondayBoolean}`)
     if (isMondayBoolean) {
-        console.log(parsedDate, "parsed date if ismondayboolean true")
         return parsedDate;
     } else {
-        // let test = previousMonday(parsedDate);
-        // console.log(parsedDate, "parsed date", test, "previousMonday(parsedDate)");
-        return previousMonday(parsedDate);
+
+        const monday = new Date(parsedDate.getFullYear(), parsedDate.getMonth(), parsedDate.getDate() - (dayIndexValue - 1))
+        return monday;
     }
 
 }

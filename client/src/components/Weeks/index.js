@@ -15,7 +15,7 @@ export const Week = () => {
     const weeks = useMemo(() => {
         return data?.weeks || [];
     }, [data]); // so if something in shifts changes, this will be recalculated
-    console.log(weeks, "weeks")
+    // console.log(weeks, "weeks")
 
     function convertTimestampToPacific(timestamp) {
         let date = new Date(Number(timestamp));
@@ -43,7 +43,7 @@ export const Week = () => {
                     });
                     // console.log(shiftForDate, "shift for date ")
                     return shiftForDate
-                        ? `${convertedDate} - ${shiftForDate.startTime} - ${shiftForDate.endTime}`
+                        ? `Shift: ${shiftForDate.startTime} - ${shiftForDate.endTime}`
                         : null;
                 })
                 // console.log(shiftsForWeek, "shifts wor week?")
@@ -60,7 +60,7 @@ export const Week = () => {
                         <tbody>
                             <tr>
                                 {shiftsForWeek.map((shift, shiftIndex) => (
-                                    <td key={shiftIndex}>{shift}test</td>
+                                    <td key={shiftIndex}>{shift}</td>
                                 ))}
                             </tr>
                         </tbody>
