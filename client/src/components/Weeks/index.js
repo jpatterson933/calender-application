@@ -33,7 +33,8 @@ export const Week = () => {
             weeks.map((week, index) => {
                 const shiftsForWeek = week.dates.map(date => {
                     // console.log(week, "test")
-                    const convertedDate = convertTimestampToPacific(date);
+                    // const convertedDate = convertTimestampToPacific(date);
+                    const convertedDate = date;
                     const shiftForDate = week.savedShifts.find(shift => {
                         if (shift.date === convertedDate) {
                             return true;
@@ -52,7 +53,7 @@ export const Week = () => {
                         <thead>
                             <tr>
                                 {week.dates.map((date, dateIndex) => (
-                                    <th key={dateIndex}>{convertTimestampToPacific(date)}</th>
+                                    <th key={dateIndex}>{date}</th>
 
                                 ))}
                             </tr>
